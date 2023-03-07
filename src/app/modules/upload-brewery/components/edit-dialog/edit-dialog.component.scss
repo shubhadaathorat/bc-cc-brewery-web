@@ -1,0 +1,23 @@
+@import "../../../../styles/sass/abstracts/variables.scss";
+@import "../../../../styles/sass/abstracts/mixins/mediaquerymanager.scss";
+@import "../../../styles/sass/abstracts/mixins/mixins.scss";
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.edit-input{
+    margin: 10px auto;
+}
+.btn-update{
+    background-color: $code-challenge-brand-theme;
+    color: white;
+    margin: auto 10px;
+}
+.btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

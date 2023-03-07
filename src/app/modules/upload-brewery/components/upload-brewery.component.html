@@ -1,1 +1,108 @@
-<p>upload-brewery works!</p>
+<section class="main-div">
+    <mat-card>
+      <mat-card-title>Upload brewery to associations</mat-card-title>
+      <mat-card-content>
+        <mat-stepper [orientation]="stepperOrientation" linear #stepper labelPosition="bottom" disableRipple="false" style="width: 100%">
+          <!--File upload-->
+          <mat-step label="Upload File">
+            <div class="container">
+              <button mat-stroked-button type="button" class="" (click)="fileInput.click()">
+                <span ><mat-icon>upload_file</mat-icon> &nbsp; Upload File</span>
+                <input #fileInput type="file" onclick="value = null" (change)="fileUploadHandler($event)" style="display:none;" placeholder="Upload File" accept=".xlsx"/>
+              </button>
+              <div class="files-list" *ngIf="filename">
+                <div class="info">
+                  <h4 class="name">
+                    {{ filename }} | Size: {{ fileSize }}
+                  </h4>
+                </div>
+              </div>
+              <p class="helper-text">Supported Format: .xlsx | .csv</p>
+            </div>
+            <div class="description">
+              <div class="desc-title"> <p><strong> Description: </strong></p> </div>
+              <div class="desc-body">
+                <p> Please check column header. Fill up all the details correctly. </p>
+              </div>
+            </div>
+            <div class="excel-next-button-container">
+              <div class="helper-button-container">
+                <p>Don't have a template?</p>
+                <button mat-flat-button class="custom-helper-button">
+                  <a href="assets/files/code-challenge_bulk_upload_template.xlsx" target="_blank" class="text-color-white">Get it</a>
+                </button>
+              </div>
+              <div class="main-button-container">
+                <button mat-raised-button color="primary" class="custom-button" (click)="validateImportHandler()"
+                [disabled]="isDisabledExcelNext">
+                Validate & Import
+              </button>
+              </div>
+            </div>
+          </mat-step>
+
+          <!--Validate & import-->
+        <mat-step label="Validate & Import">
+          <div class="top-row-container">
+            <mat-card
+              [ngClass]="isTableValid ?'mat-elevation-z0 valid-data':'mat-elevation-z0 valid-data border-danger'  ">
+              <mat-icon [ngClass]="isTableValid ? 'validity-icon':'validity-icon-error' " style="margin: 0 4%;"> {{
+                isTableValid?"check_circle":"warning" }}</mat-icon>
+              {{ isTableValid?validatedMsg:inValidatedMsg}}
+            </mat-card>
+            <div class="slide-toggle">
+              <mat-slide-toggle color="warn" (change)="toggleHandler($event)" [checked]="isSlideToggleChecked" [disabled]="isTableValid">
+                Only show rows with problems
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z0 code-challenge-table">
+              <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px">
+                  {{ col }}
+                </th>
+                <td *matCellDef="let element">
+                  <div *ngIf="col !== 'validity'"
+                    [ngClass]=" element[col].errMsg? 'cellRed text-align-center':'text-align-center'">
+                    {{ element[col].errMsg?element[col].value:element[col] }}
+                    <mat-icon class="tooltip" *ngIf="element[col].errMsg" aria-hidden="false" matPrefix
+                      matTooltip="{{element[col].errMsg}}">info</mat-icon>
+                    <mat-icon class="edit-icon" *ngIf="element[col].errMsg" title="edit"
+                      (click)="editCellHandler(element[col].value, col, dataSource.filteredData.indexOf(element),'loan', element)"
+                      style="cursor: pointer;">edit</mat-icon>
+                  </div>
+                  <div *ngIf="col == 'validity'" class="text-align-center">
+                    <mat-icon [ngClass]="element[col] == 'check_circle'? 'validity-icon':'validity-icon-error' ">
+                      {{element[col]}}
+                    </mat-icon>
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let element; columns: displayedColumns" class="element-row"></tr>
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="9999">No data Available.</td>
+              </tr>
+            </table>
+
+          </div>
+          <div [hidden]="isHidden">
+            <mat-paginator [length]="loanTableDataLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+              [showFirstLastButtons]="true"></mat-paginator>
+          </div>
+          <div class="import-button-container">
+              <button mat-raised-button class="custom-button" (click)="fileDownloadHandler()" title="Download Excel With Errors" [disabled]="isTableValid">Download Excel file</button>
+              <button mat-raised-button class="custom-button" (click)="backButtonHnadler()">
+                Previous
+              </button>
+              <button mat-raised-button class="custom-button" [disabled]="!isTableValid"
+                (click)="uploadBrewery()">
+                Import
+              </button>
+          </div>
+        </mat-step>
+        </mat-stepper>
+      </mat-card-content>
+    </mat-card>
+  </section> 

@@ -12,6 +12,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatTabNav, MatTabsModule} from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -28,7 +32,11 @@ import {MatTabNav, MatTabsModule} from '@angular/material/tabs';
     MatMenuModule,
     MatSelectModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
+    MatTooltipModule
   ],
   exports: [
     MatGridListModule,
@@ -43,7 +51,11 @@ import {MatTabNav, MatTabsModule} from '@angular/material/tabs';
     MatMenuModule,
     MatSelectModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

@@ -44,23 +44,23 @@
 }
 
 @mixin code-challenge-padding($top, $right, $bottom, $left) {
-   padding: $top $right $bottom $left;  
+  padding: $top $right $bottom $left;
 }
 
 @mixin code-challenge-margin($top, $right, $bottom, $left) {
-  margin: $top $right $bottom $left;  
+  margin: $top $right $bottom $left;
 }
 
 @mixin code-challenge-border {
-  border: solid 1px rgba($color-black, 0.3)
+  border: solid 1px rgba($color-black, 0.3);
 }
 
 @mixin column-layout {
-  display:flex;
+  display: flex;
   flex-direction: row; // default.
   justify-content: space-between;
   align-items: flex-start;
-  width:100%;
+  width: 100%;
 }
 
 @mixin code-challenge-control {
@@ -76,7 +76,7 @@
 
 @mixin code-challenge-center($maxWidth) {
   max-width: $maxWidth;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 @mixin code-challenge-border-top($color, $width) {
@@ -94,7 +94,7 @@
 @mixin code-challenge-error-msg {
   border: 1px solid $color-gray-light-10;
   border-radius: 1rem;
-  background-color: rgba(45,204,211,.4);
+  background-color: rgba(45, 204, 211, 0.4);
   @include code-challenge-padding(0.9rem, 1.2rem, 0.7rem, 1.2rem);
   @include code-challenge-margin(1rem, 0, 0, 0);
   width: 100%;
@@ -108,117 +108,140 @@
   height: auto;
 }
 
- // ribbon on banner
- @mixin code-challenge-ban-ribbon($color) {
+// ribbon on banner
+@mixin code-challenge-ban-ribbon($color) {
   margin: 0 0rem 1.9rem -3rem;
   overflow: display;
   font-size: 2.5rem;
   font-weight: 600;
   letter-spacing: -0.9px;
   @include respond(phone) {
-      font-size: 1.6rem;
-      line-height: 0.8rem;
+    font-size: 1.6rem;
+    line-height: 0.8rem;
   }
   @include respond(tab-port) {
-      font-size: 2.0rem;
-      line-height: 1.0rem;
-      margin: 0 0rem 1.5rem -3rem;
+    font-size: 2rem;
+    line-height: 1rem;
+    margin: 0 0rem 1.5rem -3rem;
   }
   & a {
-      display: block;
-      padding: 2.2rem 8rem;
-      position: relative;
-      background: $color;
-      overflow: visible;
-      height: 7rem;
-      margin-left: 1rem;
-      color: #1D1D1D;
-      text-decoration: none;
-      width: 65%;
-      @include respond(phone) {
-          width: 87%;
-          padding: 2.2rem 3.5rem;
-          height: 4.62rem;
-      }
-      @include respond(tab-port) {
-          width: 47%;
-          padding: 2.2rem 3.5rem;
-          height: 4.62rem;
-      }
+    display: block;
+    padding: 2.2rem 8rem;
+    position: relative;
+    background: $color;
+    overflow: visible;
+    height: 7rem;
+    margin-left: 1rem;
+    color: #1d1d1d;
+    text-decoration: none;
+    width: 65%;
+    @include respond(phone) {
+      width: 87%;
+      padding: 2.2rem 3.5rem;
+      height: 4.62rem;
+    }
+    @include respond(tab-port) {
+      width: 47%;
+      padding: 2.2rem 3.5rem;
+      height: 4.62rem;
+    }
   }
   & a:before {
-      content: "";
-      height: 0;
-      width: 1.8rem;
-      display: block;
-      position: absolute;
-      top: 0;
-      right: -4.8rem;
-      border-top: 7rem solid $color;
-      border-right: 4.9rem solid transparent;
-      @include respond(phone) {
-          right: -4.79rem;
-          border-top: 4.62rem solid $color;
-      }
-      @include respond(tab-port) {
-          right: -4.79rem;
-          border-top: 4.62rem solid $color;
-      }
+    content: "";
+    height: 0;
+    width: 1.8rem;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -4.8rem;
+    border-top: 7rem solid $color;
+    border-right: 4.9rem solid transparent;
+    @include respond(phone) {
+      right: -4.79rem;
+      border-top: 4.62rem solid $color;
+    }
+    @include respond(tab-port) {
+      right: -4.79rem;
+      border-top: 4.62rem solid $color;
+    }
   }
 }
- // mixin to center card data to center
- @mixin code-challenge-card-center {
-  // display: flex;
-  // justify-content: center;
-  // flex-direction: column;
-  display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    justify-content: center;
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      display:block;
-   }
+// mixin to center card data to center
 
- }
- 
- @mixin code-challenge-card-center-align {
+@mixin code-challenge-ie-whitespace-unset {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    white-space: normal;
+  }
+}
+@mixin code-challenge-mb-0 {
+  margin-bottom: 0;
+}
+
+// Flex Styles
+@mixin code-challenge-flex-column-center {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  justify-content: center;
+}
+@mixin code-challenge-flex-column-center-align {
+  @include code-challenge-flex-column-center;
+  align-items: center;
+}
+@mixin code-challenge-card-center {
+  @include code-challenge-flex-column-center;
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    display: block;
+  }
+}
+@mixin code-challenge-card-center-align {
   display: flex;
   justify-content: center;
- }
-
- @mixin code-challenge-ie-whitespace-unset{
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      white-space:normal;
-  }
- }
- @mixin code-challenge-mb-0{
-   margin-bottom: 0;
- }
- @mixin code-challenge-button {
-  width: 30rem;
-  background-color: $code-challenge-button-bg-color;
-  color: $color-white;
-  font-size: 2rem;
-  padding: 0.3rem 0;
- }
- 
- @mixin flex-center {
+}
+@mixin code-challenge-flex-center {
   display: flex;
   align-items: center;
+}
+@mixin flex-center {
+  @include code-challenge-flex-center;
   justify-content: space-between;
 }
-
+@mixin flex-space-even {
+  @include code-challenge-flex-center;
+  justify-content: space-evenly;
+}
 @mixin code-challenge-center-align {
   display: inline-flex;
   align-items: center;
 }
-
-@mixin code-challenge-flex-center {
-  display: flex;
+@mixin code-challenge-grid-center-align {
+  display: inline-grid;
+  justify-content: center;
   align-items: center;
+}
+@mixin flex-container {
+  @include flex-space-even;
+  flex-flow: row wrap;
+}
+
+// Button Mixin
+@mixin code-challenge-theme-btn {
+  background-color: $code-challenge-brand-theme;
+  color: $color-white;
+}
+@mixin code-challenge-button {
+  width: 30rem;
+  font-size: 2rem;
+  padding: 0.3rem 0;
+  @include code-challenge-theme-btn;
+}
+
+@mixin code-challenge-theme-btn-reverse {
+  background-color: $color-white;
+  color: $code-challenge-brand-theme;
 }
 
 @mixin code-challenge-cancel-btn {
@@ -227,8 +250,510 @@
   border: 0.5px solid $code-challenge-brand-theme;
   box-shadow: none;
 }
-@mixin code-challenge-theme-btn {
-  background-color: $code-challenge-brand-theme;
-  color: $color-white;
+
+// Table Mixin
+@mixin edit-icon {
+  color: blue;
+}
+@mixin delete-icon {
+  color: $code-challenge-color-black;
+  margin-left: 2.5rem;
+}
+@mixin action-icon {
+  margin: auto 5px;
+  cursor: pointer;
+  color: $code-challenge-brand-theme;
+}
+@mixin code-challenge-table-heading {
+  font-style: normal;
+  font-weight: $fw-lighter;
+  font-size: $fs-medium;
 }
 
+@mixin code-challenge-table-cell-borders {
+    .mat-cell {
+    padding: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-left: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-right: 0.5px solid rgba(0, 0, 0, 0.12);
+    text-align: center;
+  }
+  .mat-header-cell {
+    padding: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-left: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-right: 0.5px solid rgba(0, 0, 0, 0.12);
+    text-align: center;
+  }
+}
+@mixin code-challenge-slide-toggle-table-cell {
+    ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+      background-color: $code-challenge-brand-theme;
+  }
+  ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+      background-color: #ceecf8;
+  }
+}
+@mixin code-challenge-table-cell {
+  height: 60px;
+  font-size: $fs-small;
+  line-height: 19px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  vertical-align: middle;
+  @include code-challenge-slide-toggle-table-cell;
+}
+@mixin code-challenge-table {
+  border-radius: 25px;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: $default-font;
+  .mat-row:nth-child(even) {
+    background-color: #f4f7fc;
+  }
+  th,
+  td,
+  mat-header-cell,
+  mat-cell {
+    padding: 0;
+    height: 60px;
+    line-height: 19px;
+    justify-content: center;
+    text-align: center;
+  }
+  th,
+  mat-header-cell {
+    @include code-challenge-table-heading;
+    @include code-challenge-table-cell;
+    background-color: $code-challenge-brand-theme;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: $color-white;
+  }
+  td,
+  mat-cell {
+    color: #2e3b52;
+    font-size: $fs-small;
+    @include code-challenge-table-cell;
+    // font-weight: $fw-normal;
+  }
+  .edit-icon {
+    @include edit-icon;
+  }
+  .delete-icon {
+    @include delete-icon;
+  }
+  .action-icon {
+    @include action-icon;
+  }
+}
+
+// Width
+@mixin code-challenge-wh-full {
+  width: 100%;
+  height: 100%;
+  @include breakpoint-max(700px) {
+    height: 78%;
+    margin-bottom: 25%;
+  }
+}
+
+// Card Layout
+@mixin code-challenge-card-title {
+  border-bottom: 1px solid $divider-color;
+  font-size: $fs-medium;
+  padding: $card-padding;
+  font-weight: $fw-lighter;
+  @include breakpoint-max(700px) {
+    font-size: $fs-regular;
+  }
+}
+@mixin code-challenge-card-content {
+  padding: 0 $card-padding; 
+  // height: calc(100% - 40px);
+}
+@mixin code-challenge-card-layout {
+  padding: 0;
+  .mat-card-title {
+    @include code-challenge-card-title;
+  }
+  .mat-card-content {
+    @include code-challenge-card-content;
+  }
+}
+@mixin code-challenge-card-layout-head-btn {
+  padding: 0;
+  .header-div {
+    @include flex-center;
+    @include code-challenge-card-title;
+    mat-card-title {
+      margin: 0;
+      font-size: $fs-medium;
+      font-weight: $fw-lighter;
+      @include breakpoint-max(700px) {
+        font-size: $fs-regular;
+      }
+    }
+  }
+  .mat-card-content {
+    @include code-challenge-card-content;
+  }
+}
+@mixin code-challenge-sticky-content-layout {
+    .mat-card {
+      height: calc(100% - 39px);
+      @include breakpoint-max(702px) {
+        // min-height: calc(100vh - 160px);
+        height: auto;
+      }
+      .mat-card-content {
+        height: calc(100% - 55px);
+        @include breakpoint-max(702px) {
+          min-height: calc(100vh - 214px);
+        }
+        .main-table-container{
+          height: calc(100% - 111px);
+          @include breakpoint-max(702px) {
+            height: auto;
+          }
+        }
+      }
+    }
+}
+@mixin code-challenge-sticky-content-layout-head-btn {
+  .mat-card {
+    height: calc(100% - 39px);
+    @include breakpoint-max(702px) {
+      // min-height: calc(100vh - 160px);
+      height: auto;
+    }
+    .mat-card-content {
+      height: calc(100% - 75px);
+      @include breakpoint-max(702px) {
+        min-height: calc(100vh - 234px);
+      }
+      .main-table-container{
+        height: calc(100% - 111px);
+        @include breakpoint-max(702px) {
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+// Two column form input grid
+@mixin form-two-column-grid {
+  display: grid;
+  grid-row-gap: 2em;
+  // grid-template-rows: 40px 40px 40px;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2.5rem;
+  .grid-button {
+    grid-column: 1 / span 2;
+  }
+  @include respond(phone) {
+    display: block;
+    .mat-form-field {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Word-break
+@mixin word-break() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+// Loan View
+// @mixin loan-view-heading {
+//   margin: 0;
+//   padding: 0.5em 1em;
+//   color: $color-dark-shade-gray;
+// }
+
+@mixin flex-2-column {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(50% * 0.5 - 0.25em);
+}
+@mixin loan-view-h2 {
+  h2 {
+    @include code-challenge-theme-btn;
+    margin: 0;
+    padding: 0.5em 1em;
+    font-weight: $fw-bold;
+    font-size: $fs-medium;
+  }
+}
+@mixin loan-view-h3 {
+  h3 {
+    margin: 0;
+    padding: 0.5em 1em;
+    // color: $color-dark-shade-gray;
+    color: $color-white;
+    // background: $color-light-shade-gray;
+    background: $code-challenge-brand-theme;
+    font-weight: $fw-normal;
+    font-size: $fs-regular;
+  }
+}
+@mixin loan-view-list {
+  dl {
+    margin-top: 0;
+  }
+  dl.flex {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 1em;
+    background: $blue-white;
+
+    dt {
+      @include word-break;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: 100%;
+      padding: 0.5em;
+      margin: 0;
+      font-weight: $fw-bold;
+      background: $color-gray-light-13;
+
+      @include breakpoint(320px) {
+        flex-basis: 60%;
+        margin-bottom: 0.5em;
+        border-right: $border-dashed;
+        border-bottom: $border-dashed;
+      }
+      @include breakpoint(768px) {
+        @include flex-2-column;
+      }
+    }
+
+    dd {
+      @include word-break;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 100%;
+      padding: 0.5em;
+      margin: 0;
+      margin-bottom: 0.5em;
+      background: $color-gray-light-13;
+      border-bottom: $border-dashed;
+
+      @include breakpoint(320px) {
+        flex-basis: 40%;
+      }
+
+      @include breakpoint(768px) {
+        @include flex-2-column;
+        &:nth-of-type(odd) {
+          margin-right: 1em;
+        }
+      }
+    }
+  }
+}
+
+// Modal Dialog
+@mixin pop-header {
+  padding: 12px $pop-gap;
+  background-color: $code-challenge-brand-theme;
+  @include flex-center;
+  .mat-dialog-title {
+    font-family: $default-font;
+    font-size: $fs-medium;
+    color: $color-white;
+    margin: 0;
+    @include respond(phone) {
+      font-size: $fs-regular;
+    }
+  }
+  .close-button {
+    color: $color-white;
+    &:hover {
+      background-color: $color-white;
+      color: $code-challenge-brand-theme;
+    }
+  }
+}
+@mixin pop-button {
+  @include code-challenge-theme-btn;
+  width: 12rem;
+  &:not(.mat-button-disabled) {
+    background: $code-challenge-brand-theme;
+  }
+  &.mat-button-disabled {
+    background: $color-disabled;
+    color: $color-disabled-text;
+  }
+  // @include respond(phone) {
+  //   width: 100%;
+  // }
+}
+@mixin pop-cancel-button {
+  @include code-challenge-cancel-btn;
+  width: 12rem;
+}
+@mixin pop-action {
+  margin: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  .cancel-btn{
+    @include pop-cancel-button;
+    @include respond(phone) {
+      font-size: $fs-normal;
+    }
+  }
+  .confirm-btn{
+    @include pop-button;
+    @include respond(phone) {
+      font-size: $fs-normal;
+    }
+  }
+  // button {
+  //   @include pop-button;
+  //   @include respond(phone) {
+  //     font-size: $fs-normal;
+  //   }
+  // }
+  .full-width{
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+}
+@mixin pop-content {
+  padding: $pop-gap;
+  margin: 0;
+  // @include pop-action;
+}
+
+@mixin pop-wrapper {
+  margin: -$pop-gap;
+  max-width: 650px;
+}
+
+@mixin code-challenge-table-columns-sizing {
+  .mat-column-sno {
+    min-width: 150px;
+    // width: 10%;
+    // min-width: 10%;
+  } 
+  .mat-column-fileName {
+    // width: 20%;
+    // min-width: 30%;
+    
+    min-width: 250px;
+    span {
+      width: 250px;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; 
+    }
+   
+  } 
+  .mat-column-status {
+    min-width: 150px;
+  } 
+  .mat-column-loanNo {
+    min-width: 250px;
+  } 
+  .mat-column-sanctionNo {
+    min-width: 250px;
+  }
+  .mat-column-debtor {
+    min-width: 150px;
+  }
+  .mat-column-createdBy {
+    min-width: 150px;
+  } 
+  .mat-column-createdDate {
+    min-width: 150px;
+  }
+  .mat-column-action {
+    min-width: 150px;
+  } 
+  .mat-column-email {
+    min-width: 250px;
+  }
+  .mat-column-phoneNumber {
+    min-width: 150px;
+  }
+  .mat-column-failureReason {
+    min-width: 400px;
+  }
+  .mat-column-f2fFlag {
+    min-width: 150px;
+  }
+  .mat-column-fullName {
+    min-width: 250px;
+  }
+  .mat-column-name {
+    min-width: 150px;
+  }
+  .mat-column-userName {
+    min-width: 250px;
+  }
+  .mat-column-departmentName {
+    min-width: 150px;
+  }
+  .mat-column-updatedBy {
+    min-width: 150px;
+  }
+  .mat-column-updatedDate {
+    min-width: 150px;
+  }
+  .mat-column-description {
+    min-width: 400px;
+  }
+  .mat-column-address {
+    min-width: 400px;
+  }
+  .mat-column-stateCode {
+    min-width: 150px;
+  }
+  .mat-column-digitalArtCode {
+    min-width: 150px;
+  }
+  .mat-column-articleNumber {
+    min-width: 150px;
+  }
+  .mat-column-state {
+    min-width: 150px;
+  }
+  .mat-column-articleName {
+    min-width: 400px;
+  }
+  .mat-column-relToContract {
+    min-width: 150px;
+  }
+  .mat-column-date {
+    min-width: 150px;
+  }
+  .mat-column-ip {
+    min-width: 250px;
+  }
+  .mat-column-info {
+    min-width: 400px;
+  }
+  .mat-column-title {
+    min-width: 150px;
+  }
+}

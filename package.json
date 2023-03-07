@@ -34,6 +34,8 @@
     "moment-timezone": "^0.5.26",
     "rxjs": "~6.5.3",
     "tslib": "^2.0.0",
+    "xlsx": "^0.18.5",
+    "yup": "^1.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

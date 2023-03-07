@@ -11,13 +11,13 @@
     text-align: center;
     font-size: 3rem;
     @include code-challenge-margin(5rem,0,2rem,0);
-    font-family: "HelveticaNeue-Thin";
+    // font-family: "HelveticaNeue-Thin";
     opacity: $opacity-1;
     letter-spacing: 0.01rem;
   }
 
   &__page-heading--2 {
-    font-family: "HelveticaNeue-Thin";
+    // font-family: "HelveticaNeue-Thin";
     font-weight: 400;
     font-size: 4.2rem;
     @include code-challenge-margin(5rem,0,2rem,0);
@@ -28,7 +28,7 @@
     text-align: center;
     font-size: 2rem;
     @include code-challenge-margin(2rem,0,2rem,0);
-    font-family: "HelveticaNeue-Thin";
+    // font-family: "HelveticaNeue-Thin";
     opacity: $opacity-1;
     letter-spacing: 0.01rem;
   }
