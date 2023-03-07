@@ -1,0 +1,12 @@
+@import "../../../../styles/sass/abstracts/variables.scss";
+@import "../../../../styles/sass/abstracts/mixins/mediaquerymanager.scss";
+
+.code-challenge-sub-spinner {
+    background-color:$code-challenge-footer-gray;
+    padding: 5rem 0;
+    z-index: 10;
+    &__spinner {
+      margin: 0px auto;
+      top: calc(50% - 50px);
+    }
+  }

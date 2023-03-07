@@ -1,0 +1,16 @@
+<section>
+  <div class="code-challenge-navbar">
+    <div>
+      <a routerLinkActive="active" routerLink="/home"><mat-icon matPrefix aria-hidden="false" aria-label="Home">home_outline</mat-icon></a>
+      <a routerLinkActive="active" routerLink="/upload-brewery">Upload Brewery</a>
+      <div class="dropdown">
+        <button class="dropbtn" aria-label="Mismatch Brewery">Mismatch Brewery</button>
+        <div class="dropdown-content">
+          <a routerLinkActive="active" [routerLink]="['/mismatch-brewery/ministry']">Ministry Mismatch</a>
+          <a routerLinkActive="active" [routerLink]="['/mismatch-brewery/region']">Region Mismatch</a>
+        </div>
+      </div>
+      <a routerLinkActive="active" (click)="handleLogout()">Logout</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+@import "../../../../styles/sass/abstracts/variables.scss";
+@import "../../../../styles/sass/abstracts/mixins/mediaquerymanager.scss";
+
+.code-challenge-merchant {
+    display: grid;
+    @include respond(phone) {
+        display: block;
+    }
+    &-layout_60 {
+        width: 50%;
+        float: left;
+        @include respond(phone) {
+            display: none;
+        }
+    }
+    &-layout_40 {
+        margin: -20rem 0 3rem 0;
+        width: 50%;
+        float: right;
+        @include respond(phone) {
+            width: 100%;
+            margin: -2rem 0 3rem 0;
+            float: unset;
+        }
+    }
+}
+.code-challenge-solution-banner {
+    display: block;
+    @include respond(phone) {
+        display: none;
+    }
+}

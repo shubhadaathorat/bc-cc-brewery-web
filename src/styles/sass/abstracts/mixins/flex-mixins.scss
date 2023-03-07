@@ -1,0 +1,237 @@
+// Mixins for Grid.
+@mixin code-challenge-row {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  min-width: 100%;
+  &.code-challenge-row-collapse {
+    > .code-challenge-cell {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    > .code-challenge-row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &.code-challenge-row-inside {
+    margin-left:-.75rem;
+    margin-right:-.75rem;
+  }
+}
+
+@mixin code-challenge-nowrap {
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+  }
+@mixin code-challenge-wrap-reverse {
+    -webkit-flex-wrap: wrap-reverse;
+        -ms-flex-wrap: wrap-reverse;
+            flex-wrap: wrap-reverse;
+  }
+
+// Justify Row
+@mixin code-challenge-justify-start {
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+@mixin code-challenge-justify-end {
+  -webkit-justify-content: flex-end;
+  -moz-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+@mixin code-challenge-justify-center {
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+@mixin code-challenge-justify-space {
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+@mixin code-challenge-justify-around {
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+// Alignment
+@mixin code-challenge-align-top {
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+@mixin code-challenge-align-bottom {
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+}
+@mixin code-challenge-align-center {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+@mixin code-challenge-align-baseline {
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+@mixin code-challenge-align-stretch {    
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+// Row Direction
+@mixin code-challenge-reverse {
+  -webkit-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+@mixin code-challenge-column {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+
+}
+
+@mixin code-challenge-column-reverse {
+  -webkit-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+
+// Cells
+@mixin code-challenge-cell($padding-left, $padding-right) {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+
+  @if $padding-left == true {
+     padding-left: $cell-padding;
+  }
+
+  @if $padding-right == true {
+     padding-right: $cell-padding;
+  }
+
+  display: block;
+  max-width: 100%;
+  &.code-challenge-fit {
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+  }
+  &.code-challenge-content-block {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: stretch;
+    flex-flow: row wrap;
+    min-width: 100%;
+  }
+  &.code-challenge-collapse {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@mixin code-challenge-noflex {
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+}
+
+@mixin code-challenge-twelve {
+  @include code-challenge-noflex;
+  width: 100%;
+}
+@mixin code-challenge-eleven {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 11);
+}
+@mixin code-challenge-ten {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 10);
+}
+@mixin code-challenge-nine {
+  @include code-challenge-noflex;
+  width: 75%;
+}
+@mixin code-challenge-eight {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 8);
+}
+@mixin code-challenge-seven {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 7);
+}
+@mixin code-challenge-six {
+  @include code-challenge-noflex;
+  width: 50%;
+}
+@mixin code-challenge-five {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 5);
+}
+
+@mixin code-challenge-four {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 4);
+}
+@mixin code-challenge-three {
+  @include code-challenge-noflex;
+  width: 25%;
+}
+@mixin code-challenge-two {
+  @include code-challenge-noflex;
+  width: calc(100%/12 * 2);
+}
+@mixin code-challenge-one {
+  @include code-challenge-noflex;
+  width: calc(100%/12);
+}
+//.fifths {width:20%;}
+//.offset-1 {margin-left:calc(100%/12);}
+//.offset-2 {margin-left:calc(100%/12 * 2);}
+//.offset-3 {margin-left:25%;}
+//.offset-4 {margin-left:calc(100%/12 * 4);}
+//.offset-5 {margin-left:calc(100%/12 * 5);}
+//.offset-6 {margin-left:50%;}
+//.offset-7 {margin-left:calc(100%/12 * 7);}
+//.offset-8 {margin-left:calc(100%/12 * 8);}
+//.offset-9 {margin-left:75%;}
+//.offset-10 {margin-left:calc(100%/12 * 10);}
+//.offset-11 {margin-left:calc(100%/12 * 11);}

@@ -1,0 +1,137 @@
+@charset 'utf-8';
+$default-font: "Roboto-Regular", sans-serif;
+$code-challenge-brand-blue: #008ECF;
+$code-challenge-brand-blue-dark: #00557c;
+$code-challenge-brand-background:#E0F1F9;
+$code-challenge-brand-theme: #4F5DA3;
+
+
+$bg-color-gray: #E6E5E5;
+$code-challenge-footer-gray:#F6F6F6;
+$code-challenge-footer-txt-color:#9F9F9F;
+$code-challenge-text-gray:#6B6B6B;
+$code-challenge-shadow-gray:#C9C5C5;
+$code-challenge-txt-gray-2:#776D6D;
+$code-challenge-button-bg-color:#C9C5C5;
+
+$code-challenge-color-gray-light-2:#CCCCCC;
+
+$code-challenge-color-gray: #E6E6E6;
+$code-challenge-color-gray-1: #F2F2F2;
+$code-challenge-color-gray-3: #F3F3F3;
+$code-challenge-color-gray-4: #F9F9F9; 
+$code-challenge-color-gray-2: #666666;
+$code-challenge-body-text-gray: #707070;
+$code-challenge-text-green-success: #41a700;
+
+
+
+$container-width:114rem;
+$zindex-dropdown:999;
+
+//** Divider color for between dropdown items.
+$dropdown-divider-bg:#e5e5e5;
+
+//Colors
+$color-black:black;
+$color-text:#333333;
+$color-disabled:#777;
+$color-brand:#2dccd3;
+$color-brand-1:#19bdba;
+$color-white:#fff;
+$color-gray-dark:#333;
+$color-gray-light:#777;
+$color-gray-light-1:#4a4a4a;
+$color-gray-light-2:#eee;
+$color-gray-light-3:#5c5c5c;
+$color-gray-light-4:#7f7f7f;
+$color-gray-light-5:#d4d4d4;
+$color-gray-light-6:#efefef;
+$color-gray-light-9:#888;
+$color-gray-light-10:#e6e6e6;
+$color-gray-light-11:#a7a7a7;
+$color-gray-light-12:#6e6e6e;
+$color-gray-light-13:#f5f5f5;
+$color-red: #fc4d50;
+$color-green:#6fda89;
+$color-orange: #ff8d37;
+$color-yellow:#fed951;
+$color-purple: #9063ad;
+$color-disabled: rgba(0, 0, 0, .12);
+$color-disabled-text: rgba(0, 0, 0, .38);
+
+//** Hover color for dropdown links.
+$dropdown-link-hover-color:darken($color-gray-dark, 5%);
+//** Hover background for dropdown links.
+
+
+$header-fixed-height:8rem;
+$buy-features-items-width:85%;
+
+
+$small-radius: 2px;
+$radius: 4px;
+$large-radius: 6px;
+
+// Transitions
+$fast-speed:all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+$normal-speed:all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$slow-speed:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+$slowest-speed:all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+
+
+// Shadows
+$base-shadow: 0 2px 5px rgba($color-black, 0.2), 0 2px 8px rgba($color-black, 0.14);
+$hover-shadow: 0 6px 16px rgba($color-black, 0.25), 0 4px 20px rgba($color-black, 0.18);
+$selected-shadow: 0 12px 16px rgba($color-black, 0.25), 0 18px 40px rgba($color-black, 0.19);
+$solid-shadow: 3px 3px 0px rgba($color-black,0.2);
+
+$cell-padding:.75rem;
+
+
+// Media Break Adjustments
+// Need to remove them, we won't use this technique. Instead we use media query manager.
+$large-up: "only screen and (min-width: #{75.063em})"; // < 1201px
+$large-down: "only screen and (max-width: #{75em})"; // > 1200px
+
+$medium-up: "only screen and (min-width: #{64.063em})"; // < 1025px
+$medium-down: "only screen and (max-width: #{64em})"; // > 1024px
+
+$medium-only: "only screen and (max-width: #{64em}) and (min-width: #{48.063em})";
+
+$small-up: "only screen and (min-width: #{48.063em})"; // < 769px
+$small-down: "only screen and (max-width: #{48em})"; // > 768px
+
+$smaller-up: "only screen and (min-width: #{40.063em})"; // < 641px
+$smaller-down: "only screen and (max-width: #{40em})"; // > 640px
+
+$tiny-up: "only screen and (max-width: #{30.063em})"; // < 481px
+$tiny-down: "only screen and (max-width: #{30rem})"; // > 480px
+
+//Variables for Opacity
+$opacity-1: 0.8;
+$opacity-2: 0.65;
+$pop-gap: 24px;
+
+
+// font size
+// Font Size
+$fs-xs: 11.2px;
+$fs-small: 14px;
+$fs-normal: 16px;
+$fs-regular: 18px;
+$fs-medium: 21px;
+$fs-large: 24px;
+$fs-xl: 28px;
+$fs-xxl: 38px;
+$fs-xxxl: 42px;
+
+// Line Height
+$lh-xs: 15px;
+$lh-small: 20px;
+$lh-normal: 25px;
+$lh-medium: 30px;
+$lh-large: 35px;
+$lh-xl: 40px;
+$lh-x2l: 50px;
+$lh-x4l: 10rem;

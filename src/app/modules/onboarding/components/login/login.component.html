@@ -1,0 +1,43 @@
+<section class="flex-center">
+    <div class="code-challenge-login">
+      <div *ngIf="displayLogin" class="code-challenge-login-form">
+        <mat-toolbar class="code-challenge-login-form__toolbar" color="primary">Please login to continue</mat-toolbar>
+        <mat-card>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="code-challenge-login-form__field">
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input autofocus type="text" matInput placeholder="Username" formControlName="emailid">
+              <mat-error *ngIf="hasError(loginForm,'emailid', 'required')">Username is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="code-challenge-login-form__field">
+              <mat-icon matPrefix>lock_outline</mat-icon>
+              <input [type]="hidePwd ? 'password' : 'text'" autocomplete="false" matInput placeholder="Password" formControlName="password">
+              <mat-icon matSuffix (click)="hidePwd = !hidePwd">{{hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="hasError(loginForm,'password', 'required')">Password is required</mat-error>
+            </mat-form-field>
+            <mat-card @onClickTechErr (click)="onClickTechErr()" *ngIf="techErrorMsg" class="code-challenge-login-form-error">
+              <p class="code-challenge-login-form-error__info">{{ errorTitle }}</p>
+              <span class="code-challenge-login-form__msg">{{errorSubtitle}}</span>
+            </mat-card>
+            <button type="submit" [disabled]="!loginForm.valid" mat-raised-button class="code-challenge-login-form__btn">Login</button>
+            <span class="code-challenge-login-form__fPwd" (click)="displayForm('forgot')">Forgot Password?</span>
+          </form>
+        </mat-card>
+      </div>
+      <div  *ngIf="displayForgotCredentials"  class="code-challenge-login-form">
+        <mat-toolbar class="code-challenge-login-form__toolbar" color="primary">Forgot Credentials</mat-toolbar>
+        <mat-card>
+          <form [formGroup]="forgotForm" (ngSubmit)="onForgotSubmit()">
+            <mat-form-field class="code-challenge-login-form__field">
+              <mat-icon class="material-icons-outlined" matPrefix>email</mat-icon>
+              <input autofocus type="text" matInput placeholder="Registered Email" formControlName="regEmail">
+              <mat-error *ngIf="hasError(forgotForm,'regEmail', 'required')">Email is required</mat-error>
+              <mat-error *ngIf="hasError(forgotForm,'regEmail', 'pattern')">Not a valid email</mat-error>
+            </mat-form-field>
+            <button type="submit" [disabled]="!forgotForm.valid" mat-raised-button class="code-challenge-login-form__btn">Submit</button>
+            <span class="code-challenge-login-form__loginLink" (click)="displayForm('login')">Back To Login</span>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+</section>  

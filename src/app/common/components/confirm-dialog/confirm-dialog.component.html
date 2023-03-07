@@ -1,0 +1,52 @@
+<!-- <div class="pop-wrapper">
+    <div class="pop-head">
+        <h4 mat-dialog-title class="title">{{data.title}}</h4>
+        <button mat-icon-button class="close-button" (click)="onClickNegative()" >
+            <mat-icon class="close-icon">close</mat-icon>
+        </button>
+    </div>
+    <div class="pop-content" mat-dialog-content>
+        {{data.message}}
+    </div>
+    <div mat-dialog-actions class="pop-action">
+        <button class="cancel-btn" mat-raised-button (click)="onClickNegative()">{{data.negative}}</button>
+        <button class="confirm-btn" mat-raised-button (click)="onClickPositive()">{{data.positive}}</button>
+    </div>
+</div> -->
+
+<!-- <div class="modal-header">
+  <h4 class="modal-title">{{ data.title }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="onClickNegative()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  {{ data.message }}
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="onClickNegative()">
+    {{ data.negative }}
+  </button>
+  <button type="button" class="btn btn-primary" (click)="onClickPositive()">
+    {{ data.positive }}
+  </button>
+</div> -->
+
+<div class="header">
+    <h2 mat-dialog-title>{{data?.title}}</h2>
+    <button mat-icon-button [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div mat-dialog-content>
+    {{data?.message}}
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button [mat-dialog-close]="false">No</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true">Yes</button>
+</div>

@@ -1,0 +1,4 @@
+# Group 1
+Sitemap: https://code-challenge.co/sitemap.xml
+User-agent: *
+Allow: /

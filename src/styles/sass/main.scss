@@ -1,0 +1,21 @@
+/**
+  NOTES:
+  (a) No underscore and extensions required for import.
+  (b) NOTE: The vendor files may have been customized to fit UI needs. 
+      WHY: we want to write the media queries at the place where the relevant classes are defined.
+      This increases code reusability, maintenance. Customized vendor files are named as name-custom.scss
+      to indicate that it has been customized to fit UI needs so that it is easier to compare with the 
+      OOTB file later. The objective of having selective components from vendors is because we do not want to make the custom css file bloated with unused CSS classes. 
+  (c) If you want to get the OOTB Bootstrap sass files, you can get it from    
+      https://github.com/twbs/bootstrap-sass
+**/
+
+@import "abstracts/variables.scss", "abstracts/mixins/mediaquerymanager.scss",  "abstracts/mixins/flex-mixins.scss", "abstracts/mixins/mixins.scss", "abstracts/utilities.scss";
+@import "base/base.scss", "base/typography.scss", "base/common.scss";
+@import "layout/container";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+
+

@@ -1,0 +1,234 @@
+@mixin paint-svg-on-hover($color) {
+  &:hover svg path {
+    fill: $color;
+  }
+}
+
+@mixin code-challenge-nav-divider($color) {
+  height: 1px;
+  margin: ((20/ 2) - 1) 0;
+  overflow: hidden;
+  background-color: $color;
+}
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin small-branded-text($text-size) {
+  font-size: $text-size;
+  letter-spacing: 0.1px;
+  color: $color-brand;
+}
+
+@mixin input-text-focus {
+  &:focus {
+    border-color: $color-brand-1;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba($color-black, 0.075),
+      0 0 8px rgba(25, 189, 186, 0.6);
+  }
+}
+
+@mixin button-focus {
+  &:focus {
+    outline: 0;
+  }
+}
+
+@mixin code-challenge-padding($top, $right, $bottom, $left) {
+   padding: $top $right $bottom $left;  
+}
+
+@mixin code-challenge-margin($top, $right, $bottom, $left) {
+  margin: $top $right $bottom $left;  
+}
+
+@mixin code-challenge-border {
+  border: solid 1px rgba($color-black, 0.3)
+}
+
+@mixin column-layout {
+  display:flex;
+  flex-direction: row; // default.
+  justify-content: space-between;
+  align-items: flex-start;
+  width:100%;
+}
+
+@mixin code-challenge-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  @include code-challenge-padding(1.2rem, 1.5rem, 1.2rem, 1.5rem);
+  font-size: 1.8rem;
+  @include code-challenge-border;
+  border-radius: 0.8rem;
+  width: 100%;
+  @include input-text-focus;
+}
+
+@mixin code-challenge-center($maxWidth) {
+  max-width: $maxWidth;
+  margin:0 auto;
+}
+
+@mixin code-challenge-border-top($color, $width) {
+  border-top: $color solid $width;
+}
+
+@mixin code-challenge-card {
+  border-radius: 0.8rem;
+  background-color: $color-white;
+  box-shadow: 0 0 1.7rem 0.1rem rgba($color-black, 0.08);
+  border: solid 0.5px rgba(151, 151, 151, 0.2);
+  padding: 2.4rem;
+}
+
+@mixin code-challenge-error-msg {
+  border: 1px solid $color-gray-light-10;
+  border-radius: 1rem;
+  background-color: rgba(45,204,211,.4);
+  @include code-challenge-padding(0.9rem, 1.2rem, 0.7rem, 1.2rem);
+  @include code-challenge-margin(1rem, 0, 0, 0);
+  width: 100%;
+  text-align: center;
+}
+
+//newly added mixins
+@mixin code-challenge-ban-img-fluid {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ // ribbon on banner
+ @mixin code-challenge-ban-ribbon($color) {
+  margin: 0 0rem 1.9rem -3rem;
+  overflow: display;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.9px;
+  @include respond(phone) {
+      font-size: 1.6rem;
+      line-height: 0.8rem;
+  }
+  @include respond(tab-port) {
+      font-size: 2.0rem;
+      line-height: 1.0rem;
+      margin: 0 0rem 1.5rem -3rem;
+  }
+  & a {
+      display: block;
+      padding: 2.2rem 8rem;
+      position: relative;
+      background: $color;
+      overflow: visible;
+      height: 7rem;
+      margin-left: 1rem;
+      color: #1D1D1D;
+      text-decoration: none;
+      width: 65%;
+      @include respond(phone) {
+          width: 87%;
+          padding: 2.2rem 3.5rem;
+          height: 4.62rem;
+      }
+      @include respond(tab-port) {
+          width: 47%;
+          padding: 2.2rem 3.5rem;
+          height: 4.62rem;
+      }
+  }
+  & a:before {
+      content: "";
+      height: 0;
+      width: 1.8rem;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: -4.8rem;
+      border-top: 7rem solid $color;
+      border-right: 4.9rem solid transparent;
+      @include respond(phone) {
+          right: -4.79rem;
+          border-top: 4.62rem solid $color;
+      }
+      @include respond(tab-port) {
+          right: -4.79rem;
+          border-top: 4.62rem solid $color;
+      }
+  }
+}
+ // mixin to center card data to center
+ @mixin code-challenge-card-center {
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
+  display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display:block;
+   }
+
+ }
+ 
+ @mixin code-challenge-card-center-align {
+  display: flex;
+  justify-content: center;
+ }
+
+ @mixin code-challenge-ie-whitespace-unset{
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      white-space:normal;
+  }
+ }
+ @mixin code-challenge-mb-0{
+   margin-bottom: 0;
+ }
+ @mixin code-challenge-button {
+  width: 30rem;
+  background-color: $code-challenge-button-bg-color;
+  color: $color-white;
+  font-size: 2rem;
+  padding: 0.3rem 0;
+ }
+ 
+ @mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin code-challenge-center-align {
+  display: inline-flex;
+  align-items: center;
+}
+
+@mixin code-challenge-flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin code-challenge-cancel-btn {
+  background-color: $color-white;
+  color: $code-challenge-brand-theme;
+  border: 0.5px solid $code-challenge-brand-theme;
+  box-shadow: none;
+}
+@mixin code-challenge-theme-btn {
+  background-color: $code-challenge-brand-theme;
+  color: $color-white;
+}
+

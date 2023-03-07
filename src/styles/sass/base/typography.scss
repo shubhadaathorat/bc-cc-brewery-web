@@ -1,0 +1,28 @@
+// Headers
+h1, h2, h3, h4, h5, .code-challenge-h1, .code-challenge-h2, .code-challenge-h3, .code-challenge-h4, .code-challenge-h5 {
+    font-family: $default-font;
+    font-weight:normal;
+    text-rendering: optimizeLegibility;
+    font-size: inherit;
+    &.code-challenge-super-header {
+      font-size:4rem;
+      line-height:1.18;
+    }
+  }
+  .code-challenge-super-header {font-size:4rem;line-height:1.18;}
+  .code-challenge-h1 {font-size:3rem;line-height:1.22;color:$color-gray-light-1;opacity: 0.58;}
+  .code-challenge-h2 {font-size:2rem;line-height:1.4;color:$color-gray-light-1;opacity: 0.8;}
+  .code-challenge-h3 {font-size:2rem;line-height:1.55;}
+  .code-challenge-h4 {font-size:1.5rem;line-height:1.7;}
+  .code-challenge-h5 {font-size:1rem;line-height:1.85;}
+  .code-challenge-sub-header {font-weight:200;color:#616161}
+  .code-challenge-super-header.vw {font-size:5vw;}
+  .code-challenge-h1.vw {font-size:3.5vw;}
+  .code-challenge-h2.vw {font-size:3vw;}
+  .code-challenge-h3.vw {font-size:2.5vw;}
+  .code-challenge-h4.vw {font-size:2vw;}
+  .code-challenge-h5.vw {font-size:1.5vw;}
+  .code-challenge-strong {
+    font-weight: 600;
+    color: $color-black;
+  }

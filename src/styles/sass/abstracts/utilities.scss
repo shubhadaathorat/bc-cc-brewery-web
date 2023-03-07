@@ -1,0 +1,70 @@
+/**
+  Declare common utility classes
+**/
+.code-challenge-hide {
+  display: none;
+}
+
+.code-challenge-border-top {
+  border-top: $color-gray-light-2 solid 1px;
+}
+
+.code-challenge-padding-top-8rem {
+  @include code-challenge-padding(8rem, 0, 0, 0);
+}
+
+.code-challenge-border-top-bottom {
+  border-top: $color-gray-light-2 solid 1px;
+  border-bottom: $color-gray-light-2 solid 1px;
+}
+
+.code-challenge-margin-bottom-8rem {
+  @include code-challenge-margin(0, 0, 8rem, 0);
+}
+
+.spanErrors {
+  color: #ff0000;
+}
+
+.code-challenge-alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.code-challenge-alert {
+  @include code-challenge-padding(1.5rem, 1.5rem, 1.5rem, 1.5rem);
+  @include code-challenge-margin(1rem, 0, 1rem, 0);
+  border: 1px solid transparent;
+  border-radius: .8rem;
+}
+
+// Box Styling
+.rounded {border-radius:$large-radius;}
+.round {border-radius:4000px;}
+.solid-shadow {box-shadow:$solid-shadow;}
+
+.code-challenge-hr {
+  color: rgba($color-black, 0.3);
+  @include code-challenge-margin(3rem, 0, 3rem, 0);
+}
+
+.code-challenge-uppercase {text-transform:uppercase;}
+.code-challenge-pagination {
+  @include code-challenge-row;
+  @include code-challenge-justify-end;
+  @include code-challenge-align-center;
+}
+
+.code-challenge-lonelyisland {
+  border-radius: .8rem;
+  background-color: $color-white;
+  box-shadow: 0 0 17px 1px rgba($color-black, 0.08);
+  border: solid 0.5px rgba(151, 151, 151, 0.2);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include code-challenge-margin(0, 7rem, 16.4rem, 0);
+  padding: 5.4rem;
+}

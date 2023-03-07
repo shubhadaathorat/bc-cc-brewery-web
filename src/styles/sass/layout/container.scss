@@ -1,0 +1,24 @@
+$phone-max-width-in-perc:100%;
+$tablet-port-max-width-in-perc:100%;
+.code-challenge-content {
+  max-width: $container-width;  
+  margin: 0 auto; // center block elements within other block elements.  
+
+  &-with-margin-top {
+    @extend .code-challenge-content;
+    margin-top:3.7rem !important;
+    @include respond(phone) {
+      max-width: $phone-max-width-in-perc;  
+    }
+  }
+
+  @include respond(tab-port) {
+    max-width: $tablet-port-max-width-in-perc;  
+  }
+
+  @include respond(phone) {
+    max-width: $phone-max-width-in-perc;  
+  }
+  
+}
+

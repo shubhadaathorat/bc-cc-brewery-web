@@ -1,0 +1,88 @@
+.code-challenge-common {
+  &__color {
+    &--brand {
+      color: $color-brand;
+    }
+    &--purple {
+      color:$color-purple;
+    }
+  }
+  &__page-heading {
+    text-align: center;
+    font-size: 3rem;
+    @include code-challenge-margin(5rem,0,2rem,0);
+    font-family: "HelveticaNeue-Thin";
+    opacity: $opacity-1;
+    letter-spacing: 0.01rem;
+  }
+
+  &__page-heading--2 {
+    font-family: "HelveticaNeue-Thin";
+    font-weight: 400;
+    font-size: 4.2rem;
+    @include code-challenge-margin(5rem,0,2rem,0);
+    text-align: center;
+  }
+
+  &__page-subheading {
+    text-align: center;
+    font-size: 2rem;
+    @include code-challenge-margin(2rem,0,2rem,0);
+    font-family: "HelveticaNeue-Thin";
+    opacity: $opacity-1;
+    letter-spacing: 0.01rem;
+  }
+  
+  &__text {
+    opacity: $opacity-2;
+
+    &--embellished {
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.01rem;
+      line-height: 1.5;
+    }
+    
+    &--spaced {
+      padding-bottom: 1.6rem;
+      margin-bottom: 1rem;
+    }    
+  }
+
+  &-nbr-list {
+    width: 97%;
+    margin: 0 auto;
+  }
+  &-responsive {
+    @include respond(phone) {
+      width: 80%;
+      @include code-challenge-margin(0,auto,0,auto);
+    }
+    @include respond(tab-port) {
+      width: 80%;
+      @include code-challenge-margin(0,auto,0,auto);
+    }
+  }
+
+  //use these classes for lists that need special management for its counters
+  //needed for ordered lists with sublists like
+  // 1 item
+  // 1.1 subitem
+  &__managed-ordlist {
+
+    /* Create new instance of section counter 
+    whenever we instantiate a managed ordlist */
+    counter-reset: section;                
+    list-style-type: none;
+
+    &__item::before {
+
+      /* Increments only this instance of the section counter */
+      counter-increment: section;            
+      
+      /* Combine the values of all instances of the section counter
+      , separated by a period */
+      content: counters(section, ".") " ";  
+    }
+  }
+}

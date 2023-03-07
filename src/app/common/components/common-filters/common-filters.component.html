@@ -1,0 +1,29 @@
+<div [ngClass]="isFormReq ? 'filters' : 'filters-search-only'">
+    <form *ngIf="isFormReq" class="date-filters" [formGroup]="dateForm">
+        <div class="date-inputs-container">
+        <mat-form-field class="datepickers" appearance="legacy">
+            <mat-label>From Date</mat-label>
+            <input matInput [matDatepicker]="pickerfrom" (dateChange)="addEventForDateFrom('change', $event)" (click)="pickerfrom.open()" formControlName="dateFrom" onkeydown="return false" autocomplete="off" required>
+            <mat-datepicker-toggle matSuffix [for]="pickerfrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerfrom></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="datepickers" appearance="legacy">
+            <mat-label>To Date</mat-label>
+            <input matInput [matDatepicker]="pickerto" (click)="pickerto.open()" (dateChange)="addEventForDateTo('change', $event)" formControlName="dateTo" onkeydown="return false" autocomplete="off" required>
+            <mat-datepicker-toggle matSuffix [for]="pickerto"></mat-datepicker-toggle>
+            <mat-datepicker #pickerto></mat-datepicker>
+        </mat-form-field>
+        </div>
+        <div class="action-buttons-container">
+        <button class="apply-btn" (click)="datesSubmitHandler()" [disabled] ="!dateForm.valid" mat-raised-button>Apply</button>
+        <button class="apply-btn" (click)="clearDatepickers()" mat-raised-button>Clear</button>
+        </div>
+    </form>
+    <div [ngClass]="isFormReq ? 'search' : 'search-only'">
+        <mat-icon *ngIf="showSearchIcon" class="search-icon-solo" (click)="searchPopup()">search</mat-icon>
+        <div *ngIf="showSearchBox" class="searchboxx">
+            <input class="search-input" type="text" (keyup)="keyUp.next($event)" placeholder="Search here">
+            <mat-icon class="search-icon">search</mat-icon>
+        </div>
+    </div>
+</div>

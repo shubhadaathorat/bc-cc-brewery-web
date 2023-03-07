@@ -1,0 +1,78 @@
+@import "../../../styles/sass/abstracts/variables.scss";
+
+$color_1: white;
+$color_2: black;
+$font-family_1: inherit;
+$background-color_1: $code-challenge-brand-blue;
+$background-color_2: $code-challenge-brand-blue-dark;
+$background-color_3: white;
+$background-color_4: inherit;
+
+.code-challenge-navbar {
+	overflow: hidden;
+	background-color: $background-color_1;
+	display: flex;
+	justify-content: space-between;
+	a {
+		float: left;
+		font-size: 16px;
+		color: $color_1;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&:hover {
+			background-color: $background-color_2;
+		}
+    .mat-icon{
+      height: 1.9rem;
+    }
+	}
+  .dropdown {
+    float: left;
+    overflow: hidden;
+    .dropbtn {
+      font-size: 16px;
+      border: none;
+      outline: none;
+      color: $color_1;
+      padding: 14px 16px;
+      background-color: $background-color_4;
+      font-family: $font-family_1;
+      margin: 0;
+    }
+    &:hover {
+      .dropbtn {
+        background-color: $background-color_2;
+      }
+      .dropdown-content {
+        display: block;
+      }
+    }
+  }
+  .active {
+    background-color: $background-color_2;
+  }  
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $background-color_1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    a {
+      float: none;
+      color: $color_1;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      &:hover {
+        background-color: $background-color_2;
+      }
+    }
+  }
+}
