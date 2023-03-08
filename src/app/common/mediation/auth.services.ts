@@ -12,51 +12,57 @@ import { LoginRequest } from '../models/login';
     providedIn: 'root'
 })
 export class AuthService {
-
-    authID: string;
-    
-    public listPermission: string[] = []
-    public permission = new BehaviorSubject<string[]>([])
-
     constructor(private localStorageSvc: LocalStorageService,
         private router: Router,
-        private api: ApiService) {
-        this.authID = environment.globalVarAuthID;
-    }
-
-    getPermission() {
-        return this.listPermission
-    }
+        private api: ApiService) {}
 
     userLogin(request: LoginRequest) {
-        let url = urls.login
-        return this.api.post(url, request)
-            .pipe(
-                map((response) => {
-                    if (response.jwToken && response.jwToken.length > 0) {
-                        const user = response.data
-                        this.localStorageSvc.setWithExpiry(this.authID, response.jwToken, { expireHours: 1 });
-                        this.localStorageSvc.setWithExpiry("User", { id: user.id, roleId: user.roleId.id }, { expireHours: 1 });
-                        this.listPermission = user.roleId.accessLayerModule.split('|')
-                        this.permission.next(this.listPermission)
+        let url = urls.login;
+        let loginResponse = {
+        'status': 'success',
+        'code': 200,
+        'data': {
+                'userInfo': {
+                'id': 1,
+                'name': 'shubhadathorat',
+                'emailId': 'shubhadathorat@gmail.com',
+                'association': {
+                        'id':1,
+                        'name': 'East Sussex',
+                        'country': 'England'
                     }
-                    return response;
-                })
-            );
+                },
+                'breweryTypes': [
+                    { 'name': 'micro', 'id': '1'},
+                    { 'name': 'taproom', 'id': '2'},
+                    { 'name': 'brewpub', 'id': '3'}
+                ]
+            }   
+        };
+        
+        //return this.api.post(url, request)
+        return this.api.get('breweries/madtree-brewing-cincinnati')
+        .pipe(map((response) => {
+                if (loginResponse.status == 'success') {
+                    const userDetails = loginResponse?.data?.userInfo;
+                    const breweryTypeList = loginResponse?.data?.breweryTypes;
+                    this.localStorageSvc.setWithExpiry("User", userDetails, { expireHours: 1 });
+                    this.localStorageSvc.setWithExpiry("BreweryTypes", breweryTypeList, { expireHours: 1 });
+                }
+                return loginResponse;
+            })
+        );
+        
 
     }
 
     userLogout() {
-        this.localStorageSvc.removeItem(environment.globalVarAuthID);
-        this.localStorageSvc.removeItem(environment.globalMcSession);
+        this.localStorageSvc.removeItem('BreweryTypes');
         this.localStorageSvc.removeItem('User');
-        this.listPermission = []
-        this.permission.next(this.listPermission)
         this.router.navigate(['/login'], { queryParamsHandling: 'merge' });
     }
 
     isLoggedIn() {
-        return this.localStorageSvc.getWithExpiry(environment.globalVarAuthID) ? true : false;
+        return this.localStorageSvc.getWithExpiry('User') ? true : false;
     }
-
 }

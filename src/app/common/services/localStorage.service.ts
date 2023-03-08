@@ -46,6 +46,7 @@ export class LocalStorageService {
         const now = new Date();
         // `item` is an object which contains the original value
         // as well as the time when it's supposed to expire
+        console.log(value);
         const item = {
             data: value,
             expiry: options.customExpiry ? options.customExpiry : now.getTime() + (options.expireHours * 60 * 60 * 1000)

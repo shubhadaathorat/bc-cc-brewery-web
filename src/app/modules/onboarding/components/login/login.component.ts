@@ -1,7 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/common/mediation/auth.services';
+import { LoginRequest } from 'src/app/common/models/login';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'code-challenge-login',
@@ -20,54 +23,58 @@ import { Router } from '@angular/router';
     ])
   ]
 })
-export class LoginComponent implements OnInit {
-  emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]{2,4}$/;
+export class LoginComponent implements OnInit,AfterViewInit {
+  userNamePattern = /^[a-z0-9_-]{6,15}$/;
   loginForm = this.fb.group({
-    emailid: [null, [Validators.required,Validators.pattern(this.emailPattern)]],
+    username: [null, [Validators.required,Validators.pattern(this.userNamePattern)]],
     password: [null, Validators.required]
   }); 
-  forgotForm = this.fb.group({
-    regEmail: [null, [Validators.required, Validators.pattern(this.emailPattern)]],
-  });
-  displayLogin = true;
-  displayForgotCredentials = false;
+  
   hidePwd = true;
   errorTitle: string;
   errorSubtitle: string;
   techErrorMsg: boolean;
+  loginBreakpoint: any;
+  gridListColumns = 2;
+  isPhoneSize = false;
+
 
   constructor(private fb: FormBuilder,
-             // private authSvc: AuthService,
-              private router: Router ) { }
+              private authSvc: AuthService,
+              private router: Router,private observer: BreakpointObserver ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.observer.observe(["(max-width: 900px)"]).subscribe((res) => {
+       if (res.matches) {
+         this.gridListColumns = 1;
+         this.isPhoneSize = true;
+         this.loginBreakpoint = '50vh';
+       } else {
+         this.gridListColumns = 2;
+         this.isPhoneSize = false;
+         this.loginBreakpoint = '100vh'
+       }
+     });
+     }, 0);
   }
 
   public hasError = (formGroupName: FormGroup, controlName: string, errorName: string) => {
     return formGroupName.controls[controlName].hasError(errorName);
   }
 
-  displayForm(formName: string) {
-    if (formName === 'forgot') {
-      this.displayLogin = false;
-      this.displayForgotCredentials = true;
-    } else {
-      this.displayLogin = true;
-      this.displayForgotCredentials = false;
-    }
-  }
-
   onSubmit() {
     if (this.loginForm.valid) {
-      // let loginRequest = {} as LoginRequest ;
-      // loginRequest = this.loginForm.value;
-     
-      // this.authSvc.userLogin(loginRequest).subscribe((loginResponse) => {
-      //   this.router.navigate(['/'], {queryParamsHandling: 'merge'});
-      // },
-      // err => {
-      //   this.displayErrorMessage(err);
-      // });
+      let loginRequest = {} as LoginRequest ;
+      loginRequest = this.loginForm.value;     
+      this.authSvc.userLogin(loginRequest).subscribe((loginResponse) => {
+        this.router.navigate(['/'], {queryParamsHandling: 'merge'});
+      },
+      err => {
+        this.displayErrorMessage(err);
+      });
     }
   }
 
@@ -83,11 +90,5 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.techErrorMsg = false;
     }, 2000);
-  }
-
-  onForgotSubmit() {
-    if (this.forgotForm.valid) {
-      console.log(this.forgotForm.value);
-    }
   }
 }

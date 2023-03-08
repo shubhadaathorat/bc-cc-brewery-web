@@ -12,5 +12,9 @@
       </div>
       <a routerLinkActive="active" (click)="handleLogout()">Logout</a>
     </div>
+
+    <div>
+      <a><mat-icon matPrefix aria-hidden="false" aria-label="Home">person_outline</mat-icon> {{ userDetails?.name}}</a>
+    </div>
   </div>
 </section>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {RequestInterceptor} from './interceptor/request-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { jwttokenInterceptor } from './interceptor/jwt-request-interceptor';
 
 @NgModule({
   declarations: [],

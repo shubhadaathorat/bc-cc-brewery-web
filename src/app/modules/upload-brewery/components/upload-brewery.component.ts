@@ -14,6 +14,8 @@ import * as XLSX from "xlsx";
 import * as yup from "yup";
 import { EditDialogComponent } from "./edit-dialog/edit-dialog.component";
 import { FileUploadService } from '../services/file-upload.service';
+import { LocalStorageService } from 'src/app/common/services/localStorage.service';
+import { BreweryRequest } from 'src/app/common/models/brewery';
 
 @Component({
   selector: 'code-challenge-upload-brewery',
@@ -56,7 +58,10 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
   isSlideToggleChecked: boolean;
   stepperOrientation = 'horizontal';
   confirmDiscardChangesDialog: MatDialogRef<unknown, any>;
-  docIds: any;
+  breweryTypeList = [];
+  displayUploadResult = false;
+  errordisplayedColumns = ["name", "type", "street","city","province","post_code","result"];
+  breweryResultList = [];
   private destroyDiscardChanges = new Subject();
   discardChangesSubscription: Subscription;
   constructor(
@@ -65,9 +70,13 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
     private router: Router,
     private observer: BreakpointObserver,
     private cdRef: ChangeDetectorRef,
+    private localStorageSvc: LocalStorageService,
+    private brewerySvc : FileUploadService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+      this.localStorageSvc.getWithExpiry('BreweryTypes').map(resp => { this.breweryTypeList.push(resp.name)});
+  }
 
   ngAfterViewInit(): void {
     this.observer.observe(["(max-width: 700px)"]).subscribe((res) => {
@@ -96,10 +105,9 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
 
   yupSchema() {
     let brewerySchema = yup.object().shape({
-      // id: yup.string().required(),
       name: yup.string().required().max(45, "Brewery name should not exceed 45 characters"),
       street: yup.string().required().max(45, "Street name should not exceed 45 characters"),
-      brewery_type: yup.string().required().max(45, "Brewery type should not exceed 45 characters"),
+      brewery_type: yup.string().required().oneOf(this.breweryTypeList,"brewery_type not present").max(45, "Brewery type should not exceed 45 characters"),
       city: yup.string().required().max(45, "Brewery city anme should not exceed 45 characters"),
       county_province: yup.string().required().max(45, "County province should not exceed 45 characters"),
       postal_code: yup.string().required().max(45, "Postal Code should not exceed 45 characters"),
@@ -114,16 +122,16 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
       this.yupSchema()
         .validate(brewery, { abortEarly: false })
         .then((value) => {
-          this.dataSource = new MatTableDataSource<any>(this.breweryTableData);
+          this.dataSource = new MatTableDataSource<any>(this.breweryList);
           this.dataSource.paginator = this.paginator;
           this.isTableValid = true;
           this.validatedBreweries.push(value);
         })
         .catch((err) => {
           // for downloading front end error excel
-          let errorRowObject = {...this.breweryList.find((errorRow,i) => i === index),id:index};
+          let errorRowObject = {...this.breweryList.find((errorRow,i) => i === index)};
           errorRowObject.errors = err?.errors?.toString();
-          err?.errors.forEach(errorValue => {
+          err?.errors.forEach(errorValue => {   
             this.errorBreweryObject = {
               row: index,
               field: errorValue.split(" ")[0],
@@ -301,17 +309,34 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
     return true; // No duplicate values found for seqno
   }
 
+  prepareBreweryListToUpload() {
+    let breweryRequestList : BreweryRequest[] = [];
+    this.breweryList.forEach(element => {
+      let request: BreweryRequest = ({} as any) as BreweryRequest;
+      request = element;
+      breweryRequestList.push(request);
+    });
+    return breweryRequestList;
+  }
+
   uploadBrewery() {
-    if (this.isTableValid
-    ) {
+    if (this.isTableValid) {
       //upload data
+      this.stepper.next();
+      this.brewerySvc.uploadBrewery(this.prepareBreweryListToUpload()).subscribe(breweryList => {
+        this.breweryResultList = breweryList?.data?.breweryList;
+        let isHaveError = this.breweryResultList.find(brewery => brewery.result === 'rejected');
+        isHaveError ? this.displayUploadResult = true : this.displayUploadResult = false;
+        this.errordisplayedColumns = Object.keys(this.breweryResultList[0]);        
+      });
+      
     } else {
       this.alert.error(
         `Error : Incorrect data, Please go through your file data again.`
       );
     }
   }
-
+  
   ngOnDestroy(): void {
     // if (this.uploadZipSubscription) {
     //   this.uploadZipSubscription.unsubscribe();

@@ -6,6 +6,7 @@ import { CodeChallengeCommonModule } from '../../common/code-challenge-common.mo
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from '../../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoggedInGuard } from './guards/loggedIn.guard';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     OnboardingRoutingModule,
     CodeChallengeCommonModule
-  ]
+  ],
+  providers:[LoggedInGuard]
 })
 export class OnboardingModule { }

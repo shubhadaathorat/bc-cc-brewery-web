@@ -12,6 +12,7 @@ export abstract class BaseGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         if (this.isValid(route, state)) {
+            // console.log(this.isValid(route, state));
             return Promise.resolve(true);
         } else {
             let routeCode = this.isFalseNavigateToRoute(route, state);
@@ -29,6 +30,6 @@ export abstract class BaseGuard implements CanActivate {
     }
 
     private navigateToHome() {
-        this.router.navigate(['/home'], {queryParamsHandling: 'merge'});
+        this.router.navigate(['/login'], {queryParamsHandling: 'merge'});
     }
 }

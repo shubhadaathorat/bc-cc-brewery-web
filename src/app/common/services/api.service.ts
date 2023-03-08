@@ -11,11 +11,11 @@ import { environment } from '../../../environments/environment'
   providedIn: 'root'
 })
 export class ApiService {
-  ewalletEndPoint :string 
+  apiEndPoint :string;
   constructor(private http: HttpClient) {
-    this.ewalletEndPoint = environment.tmlEndpoint;
+    this.apiEndPoint = environment.apiEndpoint;
   }
-  private extractData(res: Response) {
+  private extractData(res: any) {
     let body = res;
     return body || { };
   }
@@ -34,19 +34,19 @@ export class ApiService {
   };
   
     public get(url) : Observable<any>  {
-      return this.http.get(`${this.ewalletEndPoint}/${url}`,httpOptions).pipe(map(this.extractData),
+      return this.http.get(`${this.apiEndPoint}/${url}`,httpOptions).pipe(map(this.extractData),
                             catchError(this.handleError))
     }
     public post(url:string,data: any) : Observable<any> {
-      return this.http.post(`${this.ewalletEndPoint}/${url}`,data,httpOptions).pipe(map(this.extractData),
+      return this.http.post(`${this.apiEndPoint}/${url}`,data,httpOptions).pipe(map(this.extractData),
                               catchError(this.handleError))
     }
     public update(url:string,data: any) : Observable<any>  {
-      return this.http.put(`${this.ewalletEndPoint}/${url}`,data,httpOptions).pipe(map(this.extractData),
+      return this.http.put(`${this.apiEndPoint}/${url}`,data,httpOptions).pipe(map(this.extractData),
                               catchError(this.handleError))
     }
     public delete(url:string) : Observable<any> {
-      return this.http.delete(`${this.ewalletEndPoint}/${url}`,httpOptions).pipe(map(this.extractData),
+      return this.http.delete(`${this.apiEndPoint}/${url}`,httpOptions).pipe(map(this.extractData),
                                 catchError(this.handleError))
     }
     

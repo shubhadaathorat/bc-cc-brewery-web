@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  demgenEndpoint: '',
+  apiEndpoint: 'https://api.openbrewerydb.org/',
   globalVarAuthID: 'authID',
   globalMcSession: 'mcSession'
 };

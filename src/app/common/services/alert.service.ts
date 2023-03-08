@@ -34,22 +34,25 @@ export class AlertService {
   error(message: string, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
     this.subject.next({ type: 'error', text: message });
+    this.clearAlertMessage()
   }
 
   warning(message: string, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
     this.subject.next({ type: 'warning', text: message });
+    this.clearAlertMessage()
   }
 
   info(message: string, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
     this.subject.next({ type: 'info', text: message });
+    this.clearAlertMessage()
   }
 
   clearAlertMessage() {
     setTimeout(() => {
       this.subject.next();
-    }, 5000);
+    }, 4000);
   }
   getMessage(): Observable<any> {   
     return this.subject.asObservable();

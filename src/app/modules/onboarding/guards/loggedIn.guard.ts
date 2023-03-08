@@ -6,26 +6,23 @@ import { AuthService } from 'src/app/common/mediation/auth.services';
 @Injectable()
 export class LoggedInGuard extends BaseGuard {
 
-    constructor(router: Router,
-                private authService: AuthService) {
+    constructor(router: Router, private authService: AuthService) {
         super(router);
     }
 
     isFalseNavigateToRoute(route) {
-        return 404;
+        return 100;
     }
 
     isValid(route: ActivatedRouteSnapshot) {
         if (this.authService.isLoggedIn()) {
             this.navigateToDashBoard();
-            console.log('lg_true_loggedIn');
             return true;
         }
-        console.log('lg_true');
         return true;
     }
 
     private navigateToDashBoard() {
-        this.router.navigate(['/'], {queryParamsHandling: 'merge'});
+        this.router.navigate(['/'], { queryParamsHandling: 'merge' });
     }
 }
