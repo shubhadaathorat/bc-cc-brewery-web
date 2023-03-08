@@ -39,17 +39,17 @@ export class AuthService {
                 ]
             }   
         };
-        
-        //return this.api.post(url, request)
-        return this.api.get('breweries/madtree-brewing-cincinnati')
+        console.log(url)
+        return this.api.post(url, request)
+       // return this.api.get('breweries/madtree-brewing-cincinnati')
         .pipe(map((response) => {
-                if (loginResponse.status == 'success') {
-                    const userDetails = loginResponse?.data?.userInfo;
+                if (response.status == 'success') {
+                    const userDetails = response?.data?.userInfo;
                     const breweryTypeList = loginResponse?.data?.breweryTypes;
                     this.localStorageSvc.setWithExpiry("User", userDetails, { expireHours: 1 });
                     this.localStorageSvc.setWithExpiry("BreweryTypes", breweryTypeList, { expireHours: 1 });
                 }
-                return loginResponse;
+                return response;
             })
         );
         

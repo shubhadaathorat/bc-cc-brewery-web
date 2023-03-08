@@ -1,6 +1,6 @@
 <form class="form-container" [formGroup]="editDataForm">
     <mat-form-field appearance="legacy">
-        <mat-label >{{ data.name }}</mat-label>
+        <mat-label >{{ data.name |  titlecase }}</mat-label>
         <input matInput class="edit-input" formControlName="editData" autocomplete="off">
     </mat-form-field>
     <div class="btn-container">

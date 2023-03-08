@@ -15,6 +15,11 @@ import { jwttokenInterceptor } from './interceptor/jwt-request-interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: jwttokenInterceptor,
+      multi: true,
     }
   ]
 })

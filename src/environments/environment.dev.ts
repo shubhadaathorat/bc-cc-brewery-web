@@ -3,8 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true, 
-  demgenEndpoint: 'https://api.devdomain.com/api',
-  globalVarAuthID: 'authID',
-  globalMcSession: 'mcSession'
+  production: false, 
+  apiEndpoint: 'http://localhost:3000'
 };

@@ -1,7 +1,5 @@
 export const environment = {
   production: true,
-  demgenEndpoint: 'https://api.livedomain.com/api',
-  globalVarAuthID: 'authID',
-  globalMcSession: 'mcSession'
+  apiEndpoint: 'https://4kdcnavs8g.execute-api.us-west-2.amazonaws.com'
 };
 

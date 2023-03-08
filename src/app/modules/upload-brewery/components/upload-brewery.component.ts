@@ -23,10 +23,12 @@ import { BreweryRequest } from 'src/app/common/models/brewery';
   styleUrls: ['./upload-brewery.component.scss']
 })
 export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy {
+  isProcessStarted = false;
   arrayBuffer: any;
   uploadedFile: File;
   displayedColumns: string[];
   dataSource: any;
+  breweryResultDataSource:any;
   isHidden = true;
   checked;
   pageSize = 10;
@@ -60,10 +62,10 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
   confirmDiscardChangesDialog: MatDialogRef<unknown, any>;
   breweryTypeList = [];
   displayUploadResult = false;
-  errordisplayedColumns = ["name", "type", "street","city","province","post_code","result"];
+  errordisplayedColumns = [];
   breweryResultList = [];
-  private destroyDiscardChanges = new Subject();
-  discardChangesSubscription: Subscription;
+  rejectedBreweries = [];
+  userProvince = '';
   constructor(
     private alert: AlertService,
     private dialog: MatDialog,
@@ -75,6 +77,7 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
   ) { }
 
   ngOnInit(): void {
+      this.userProvince = this.localStorageSvc.getWithExpiry('User').data?.association?.name;
       this.localStorageSvc.getWithExpiry('BreweryTypes').map(resp => { this.breweryTypeList.push(resp.name)});
   }
 
@@ -105,13 +108,13 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
 
   yupSchema() {
     let brewerySchema = yup.object().shape({
-      name: yup.string().required().max(45, "Brewery name should not exceed 45 characters"),
-      street: yup.string().required().max(45, "Street name should not exceed 45 characters"),
-      brewery_type: yup.string().required().oneOf(this.breweryTypeList,"brewery_type not present").max(45, "Brewery type should not exceed 45 characters"),
-      city: yup.string().required().max(45, "Brewery city anme should not exceed 45 characters"),
-      county_province: yup.string().required().max(45, "County province should not exceed 45 characters"),
-      postal_code: yup.string().required().max(45, "Postal Code should not exceed 45 characters"),
-      country: yup.string().required().max(45, "Country name should not exceed 45 characters"),
+      name: yup.string().required().max(255, "Brewery name should not exceed 255 characters"),
+      street: yup.string().required().max(255, "Street name should not exceed 255 characters"),
+      brewery_type: yup.string().required().oneOf(this.breweryTypeList,"brewery_type not present").max(30, "Brewery type should not exceed 30 characters"),
+      city: yup.string().required().max(75, "Brewery city anme should not exceed 75 characters"),
+      county_province: yup.string().required().max(75, "County province should not exceed 75 characters").oneOf([this.userProvince],'county_province does not match'),
+      postal_code: yup.string().required().max(10, "Postal Code should not exceed 10 characters"),
+      country: yup.string().required().max(75, "Country name should not exceed 75 characters"),
     });
     return brewerySchema;
   }
@@ -156,19 +159,17 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
 
-  editCellHandler(value, name, index) {
+  editCellHandler(value, name, element) {
     const dialogRef = this.dialog.open(EditDialogComponent, {
       disableClose: true,
       data: { value, name },
     });
     dialogRef.afterClosed().subscribe((res) => {
       // Receive data from edit-dialog component
+      console.log(element);
       this.isSlideToggleChecked = false;
-      this.breweryList[index][name] = res;
+      this.breweryList[element.id][name] = res;
       this.breweryTableData = this.breweryList.map((u) => ({ ...u }));
-      this.displayedColumns = Object.keys(this.breweryTableData[0]);
-      this.displayedColumns.splice(-1, 1);
-      this.displayedColumns.splice(0, 0, "validity");
       this.validateSchema(this.validateBrewerySheetData(this.breweryList));
     });
   }
@@ -185,8 +186,9 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
 
   validateBrewerySheetData(breweryList: any[]) {
     let validBreweryList = [];
-    breweryList.forEach((brewery, index) => {
+    breweryList.forEach((brewery) => {
       validBreweryList.push({
+        id: this.trimWhiteSpace(brewery?.id),
         name: this.trimWhiteSpace(brewery?.name),
         brewery_type: this.trimWhiteSpace(brewery?.brewery_type),
         street: this.trimWhiteSpace(brewery?.street),
@@ -218,13 +220,16 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
       });
       this.isHidden = this.breweryList.length > 0 ? false : true;
       if (this.breweryList.length && this.breweryList.length > 0) {
-        this.breweryList.forEach((element) => {element.validity = "check_circle"});
+        this.breweryList.forEach((element,index) => {
+          element.validity = "check_circle";
+          element.id = index;
+        });
         this.validateSchema(this.validateBrewerySheetData(this.breweryList));
         this.breweryTableData = this.breweryList.map((u) => ({ ...u }));
         this.breweryListWithErrors = this.breweryList.map((u) => ({ ...u }));
         this.displayedColumns = Object.keys(this.breweryTableData[0]);
-        this.displayedColumns.splice(-1, 1);
-        this.displayedColumns.splice(0, 0, "validity");
+        // change place of validity column to first
+        this.displayedColumns.splice(0, 0, this.displayedColumns.splice(this.displayedColumns.indexOf('validity'), 1)[0]);
       } else {
         if (!this.breweryList.length) {
           this.alert.error(
@@ -232,6 +237,7 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
           );
         }
         this.isDisabledExcelNext = true;
+        this.isProcessStarted = true;
       }
     };
   }
@@ -286,6 +292,18 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
+  rejectedBreweryToggleHandler(event: MatSlideToggleChange) {
+    if (event.checked) {
+      this.isSlideToggleChecked = true;
+      this.breweryResultDataSource = new MatTableDataSource<any>(this.rejectedBreweries);
+      this.breweryResultDataSource.paginator = this.paginator;
+    } else {
+      this.breweryResultDataSource = new MatTableDataSource<any>(this.breweryResultList);
+      this.breweryResultDataSource.paginator = this.paginator;
+      this.isSlideToggleChecked = false;
+    }
+  }
+
   fileDownloadHandler() {
     this.breweryListWithErrors.forEach((el) => delete el.validity);
     const fileName = "excel_with_errors.xlsx";
@@ -323,13 +341,60 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.isTableValid) {
       //upload data
       this.stepper.next();
-      this.brewerySvc.uploadBrewery(this.prepareBreweryListToUpload()).subscribe(breweryList => {
-        this.breweryResultList = breweryList?.data?.breweryList;
-        let isHaveError = this.breweryResultList.find(brewery => brewery.result === 'rejected');
-        isHaveError ? this.displayUploadResult = true : this.displayUploadResult = false;
-        this.errordisplayedColumns = Object.keys(this.breweryResultList[0]);        
-      });
-      
+      // this.brewerySvc.uploadBrewery(this.prepareBreweryListToUpload()).subscribe(breweryList => {
+      //   this.breweryResultList = breweryList?.data?.breweryList;
+      //   let isHaveError = this.breweryResultList.find(brewery => brewery.result === 'rejected');
+      //   isHaveError ? this.displayUploadResult = true : this.displayUploadResult = false;
+      //   console.log(isHaveError.length());
+      //   this.errordisplayedColumns = Object.keys(this.breweryResultList[0]);        
+      // });
+
+      let breweryResponse = {
+        'status': 'success',
+        'code': 200,
+        'data': {
+          'breweryList': [{
+              "name":"360 Degree Brewing Company",	
+              "brewery_type" : "micro"	,
+              "street" : "Bluebell Business Estate", 
+              "city" : "Sheffield Park",
+              "county_province":"East Sussex",
+              "postal_code":"TN22 3HQ",
+              "country":"England",
+              "result":"created",
+              "message" : "Added successfully"
+            },{
+              "name":"360 Degree Brewing Company",	
+              "brewery_type" : "micro"	,
+              "street" : "Bluebell Business Estate", 
+              "city" : "Sheffield Park",
+              "county_province":"East Sussex",
+              "postal_code":"TN22 3HQ",
+              "country":"England",
+              "result":"rejected",
+              "message" : "Invalid Data"
+            },{
+              "name":"360 Degree Brewing Company",	
+              "brewery_type" : "micro"	,
+              "street" : "Bluebell Business Estate", 
+              "city" : "Sheffield Park",
+              "county_province":"East Sussex",
+              "postal_code":"TN22 3HQ",
+              "country":"England",
+              "result":"rejected",
+              "message" : "Invalid Data"
+            }
+          ]
+        }
+      }
+        this.breweryResultList = breweryResponse?.data?.breweryList;
+        this.rejectedBreweries = this.breweryResultList.filter(brewery => brewery.result === 'rejected');
+        this.rejectedBreweries ? this.displayUploadResult = true : this.displayUploadResult = false;
+        console.log(this.rejectedBreweries.length);
+        this.errordisplayedColumns = Object.keys(this.breweryResultList[0]);
+        this.breweryResultDataSource = this.breweryResultList;
+        this.validatedMsg = 'All breweries successfully got uploaded';
+        this.inValidatedMsg = `${this.rejectedBreweries.length} of ${this.breweryResultList.length} breweries got rejected `;
     } else {
       this.alert.error(
         `Error : Incorrect data, Please go through your file data again.`

@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
   }
 
   displayErrorMessage(err) {
-    if (err && err.status === 400) {
+    if (err && err.status === 401 || err && err.status === 400) {
       this.errorTitle = 'Invalid login credentials.';
       this.errorSubtitle = 'TRY AGAIN';
     } else {

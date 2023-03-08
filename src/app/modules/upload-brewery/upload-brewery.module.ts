@@ -7,6 +7,7 @@ import { CodeChallengeCommonModule } from 'src/app/common/code-challenge-common.
 import { MatInputModule } from '@angular/material/input';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { UploadBreweryComponent } from './components/upload-brewery.component';
+import { DiscardChangesGuard } from 'src/app/common/guard/discard-changes.guard';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { UploadBreweryComponent } from './components/upload-brewery.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule
-  ]
+  ],
+  providers:[DiscardChangesGuard]
 })
 export class UploadBreweryModule { }

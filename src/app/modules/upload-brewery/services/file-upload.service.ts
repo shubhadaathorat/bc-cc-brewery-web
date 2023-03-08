@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 export class FileUploadService {
   
   constructor(private api: ApiService) { }
-
   uploadBrewery(request: BreweryRequest[]) {
     let url = urls.brewery;
     let breweryResponse = {
@@ -35,7 +34,7 @@ export class FileUploadService {
             "county_province":"East Sussex",
             "postal_code":"TN22 3HQ",
             "country":"England",
-            "result":"rejected",
+            "result":"created",
             "message" : "Invalid Data"
           }]
       }
