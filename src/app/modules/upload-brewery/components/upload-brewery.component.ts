@@ -65,7 +65,8 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
   errordisplayedColumns = [];
   breweryResultList = [];
   rejectedBreweries = [];
-  userProvince = '';
+  userProvince = [];
+  userCountry = [];
   constructor(
     private alert: AlertService,
     private dialog: MatDialog,
@@ -77,7 +78,10 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
   ) { }
 
   ngOnInit(): void {
-      this.userProvince = this.localStorageSvc.getWithExpiry('User').data?.association?.name;
+      let province = this.localStorageSvc.getWithExpiry('User');
+      this.userProvince.push(province?.association.name);
+      this.userCountry.push(province?.association.country);
+      console.log(province?.association.country);
       this.localStorageSvc.getWithExpiry('BreweryTypes').map(resp => { this.breweryTypeList.push(resp.name)});
   }
 
@@ -112,9 +116,9 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
       street: yup.string().required().max(255, "Street name should not exceed 255 characters"),
       brewery_type: yup.string().required().oneOf(this.breweryTypeList,"brewery_type not present").max(30, "Brewery type should not exceed 30 characters"),
       city: yup.string().required().max(75, "Brewery city anme should not exceed 75 characters"),
-      county_province: yup.string().required().max(75, "County province should not exceed 75 characters").oneOf([this.userProvince],'county_province does not match'),
+      county_province: yup.string().required().max(75, "County province should not exceed 75 characters").oneOf(this.userProvince,'county_province does not match'),
       postal_code: yup.string().required().max(10, "Postal Code should not exceed 10 characters"),
-      country: yup.string().required().max(75, "Country name should not exceed 75 characters"),
+      country: yup.string().required().max(75, "Country name should not exceed 75 characters").oneOf(this.userCountry,'country does not match')
     });
     return brewerySchema;
   }
