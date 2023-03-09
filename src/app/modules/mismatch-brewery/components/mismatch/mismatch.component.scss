@@ -13,6 +13,11 @@
 .main-div {
   .mat-card {
     @include code-challenge-card-layout;
+    .mat-card-title {
+        p {
+            font-size: small;
+        }
+    }
     .mat-card-content {
       .code-challenge-table {
         @include code-challenge-table;

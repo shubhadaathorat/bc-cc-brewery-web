@@ -17,43 +17,18 @@ export class AuthService {
         private api: ApiService) {}
 
     userLogin(request: LoginRequest) {
-        let url = urls.login;
-        let loginResponse = {
-        'status': 'success',
-        'code': 200,
-        'data': {
-                'userInfo': {
-                'id': 1,
-                'name': 'shubhadathorat',
-                'emailId': 'shubhadathorat@gmail.com',
-                'association': {
-                        'id':1,
-                        'name': 'East Sussex',
-                        'country': 'England'
-                    }
-                },
-                'breweryTypes': [
-                    { 'name': 'micro', 'id': '1'},
-                    { 'name': 'taproom', 'id': '2'},
-                    { 'name': 'brewpub', 'id': '3'}
-                ]
-            }   
-        };
-        console.log(url)
+        let url = urls.login;       
         return this.api.post(url, request)
-       // return this.api.get('breweries/madtree-brewing-cincinnati')
         .pipe(map((response) => {
                 if (response.status == 'success') {
                     const userDetails = response?.data?.userInfo;
-                    const breweryTypeList = loginResponse?.data?.breweryTypes;
+                    const breweryTypeList = response?.data?.userInfo?.breweryTypes;
                     this.localStorageSvc.setWithExpiry("User", userDetails, { expireHours: 1 });
                     this.localStorageSvc.setWithExpiry("BreweryTypes", breweryTypeList, { expireHours: 1 });
                 }
                 return response;
             })
         );
-        
-
     }
 
     userLogout() {
