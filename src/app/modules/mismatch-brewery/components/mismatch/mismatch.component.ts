@@ -4,11 +4,9 @@ import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/common/services/localStorage.service';
 import { MismatchBreweryService } from '../../services/mismatch-brewery.service';
 
-import { MatPaginator } from '@angular/material/paginator';
-import { MatStepper } from '@angular/material/stepper';
+import { MatPaginator,PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from "@angular/material/table";
 import { AlertService } from "src/app/common/services/alert.service";
-import * as XLSX from "xlsx";
 
 @Component({
   selector: 'code-challenge-mismatch',
@@ -22,13 +20,19 @@ export class MismatchComponent implements OnInit {
   userProvince = '';
   displayedColumns :string[] = [];
   mismatchBreweries:any;
+  datesObj: any;
+  searchKey: any;
   isHidden = true;
   pageSize = 5;
+  totalRows: number;
+ 
+  currentPage = 0;
+  pageEvent: PageEvent;
   mismatchDatasourceLength = 0;
   pageSizeOptions = [5, 10, 15, 20, 25, 100];
   mismatchDatasource = new MatTableDataSource();
   uploadSubscription: Subscription;
-
+  descriptionText = '';
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
@@ -44,6 +48,10 @@ export class MismatchComponent implements OnInit {
   ngOnInit(): void {
     let userDetails = this.localStorageSvc.getWithExpiry('User');
     this.userProvince = userDetails?.association.provienc;
+    this.mismatchType === 'ministry' ? this.descriptionText = `A list of breweries that exist in the 
+    Ministry data but are not included on my own brewery association list` : this.descriptionText = `A list of breweries that exist on my 
+    own brewery association list, but not in the Ministry data.`;
+    
     console.log(this.userProvince);
     this.getMismatchBreweries();
   }
@@ -55,7 +63,8 @@ export class MismatchComponent implements OnInit {
       this.displayedColumns = Object.keys(breweries[0]);
       this.mismatchDatasource = new MatTableDataSource<any>(this.mismatchBreweries);
       this.mismatchDatasource.paginator = this.paginator;
-      this.mismatchDatasourceLength = this.mismatchBreweries.length;
+      this.mismatchDatasourceLength = this.mismatchBreweries?.length;
+      this.isHidden = this.mismatchDatasourceLength > 0 ? false : true;
     });
   }
 

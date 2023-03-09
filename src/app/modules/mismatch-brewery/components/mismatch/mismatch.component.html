@@ -1,12 +1,16 @@
 <section class="main-div">
     <mat-card>
-      <mat-card-title>Mismatch Brewery - {{mismatchType | titlecase}}</mat-card-title>
-        <mat-card-content>
-            <div class="top-row-container">
-                <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName: '', sheet: 'sheet_name', Props: {Author: 'Brewery'}})">Excel</button>
-                <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
-                <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
-                <button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
+      <mat-card-title>Mismatch Brewery - {{mismatchType | titlecase}} 
+      </mat-card-title>
+        <mat-card-content>            
+            <div class="top-row-container" >
+                <p>{{descriptionText}}</p>
+                <div *ngIf='mismatchDatasourceLength > 0'>
+                    <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName: '', sheet: 'sheet_name', Props: {Author: 'Brewery'}})">Excel</button>
+                    <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
+                    <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
+                    <button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
+                </div>                
               </div>
             <div class="table-container">
                 <table matTableExporter mat-table [dataSource]="mismatchDatasource" multiTemplateDataRows
