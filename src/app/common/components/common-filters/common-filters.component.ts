@@ -64,18 +64,6 @@ export class CommonFiltersComponent implements OnInit, OnDestroy {
       this.onKeyUpSearch.emit(value);
     });
   }
-  // hide/unhide searchbar
-  
-  // searchPopup(){
-  //   if(!this.showSearchBox){
-  //     this.showSearchBox = true;
-  //     this.showSearchIcon = false;
-  //   }else{
-  //     this.showSearchBox = false;
-  //     this.showSearchIcon = true;
-  //     this.onKeyUpSearch.emit("");
-  //   }
-  // }
 
   // function for detecting changes in fromDate datepicker
   addEventForDateFrom(type: string, event: MatDatepickerInputEvent<Date>) {

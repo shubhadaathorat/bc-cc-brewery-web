@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { WhiteSpaceTrimPipe } from './pipe/whitespace-trim.pipe';
 import { FormatTimePipe } from './pipe/formatTime.pipe';
@@ -19,12 +19,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogService } from './services/confirm-dialog.service';
-
+import { CommonFiltersComponent } from './components/common-filters/common-filters.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [ WhiteSpaceTrimPipe, SpinnerComponent,
      FormatTimePipe, SubSpinnerComponent, AddressTitleCasePipe,
      FormatPhoneDirective,DigitOnlyDirective,
-     ConfirmDialogComponent,
+     ConfirmDialogComponent,CommonFiltersComponent,
      AlertComponent],
   imports: [
     CommonModule,
@@ -33,7 +36,11 @@ import { ConfirmDialogService } from './services/confirm-dialog.service';
     RouterModule,
     MatToolbarModule,
     MatIconModule,
-    MatDialogModule 
+    MatDialogModule ,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     CommonModule,    
@@ -47,10 +54,10 @@ import { ConfirmDialogService } from './services/confirm-dialog.service';
     DigitOnlyDirective,
     WhiteSpaceTrimPipe, SpinnerComponent,
      FormatTimePipe, SubSpinnerComponent,
-     AlertComponent
+     AlertComponent,CommonFiltersComponent
   ],
   providers: [SpinnerService, AddressTitleCasePipe,
-    CookiesService, LocalStorageService,ConfirmDialogService ]
+    CookiesService, LocalStorageService,ConfirmDialogService,DatePipe ]
 })
 export class CodeChallengeCommonModule {}
 
