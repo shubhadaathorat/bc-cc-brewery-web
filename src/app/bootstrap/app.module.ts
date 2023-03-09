@@ -24,8 +24,8 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     AppRoutingModule,
     CustomHttpModule,
-    CodeChallengeCommonModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    CodeChallengeCommonModule
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent]
 })
