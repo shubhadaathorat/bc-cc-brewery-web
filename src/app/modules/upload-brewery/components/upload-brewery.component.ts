@@ -21,30 +21,30 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./upload-brewery.component.scss']
 })
 export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy {
-  
-  uploadedFile: File;  
+
+  uploadedFile: File;
   dataSource: any;
-  breweryResultDataSource: any; 
+  breweryResultDataSource: any;
   filename: string;
   fileSize: string;
   breweryList: any;
-  errorObjectIndex: any;  
+  errorObjectIndex: any;
   isTableValid: boolean;
   errRows: any;
   breweryTableData: any;
-  breweryTableDataLength:any;
+  breweryTableDataLength: any;
   breweryListWithErrors: any;
   validatedBreweries = [];
   breweryTypeList = [];
   breweryResultList = [];
   rejectedBreweries = [];
   displayedColumns: string[] = [];
-  errordisplayedColumns: string[] = [];  
+  errordisplayedColumns: string[] = [];
   userProvince: string[] = [];
   userCountry: string[] = [];
   errorBreweryObject: { row: any; field: any; erMsg: any };
 
-  inValidatedMsg = '';  
+  inValidatedMsg = '';
   isDisabledExcelNext = true;
   isProcessStarted = false;
   isSlideToggleChecked = false;
@@ -329,21 +329,21 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.isTableValid) {
       this.isSlideToggleChecked = false;
       this.isProcessStarted = false;
-      this.uploadSubscription = this.brewerySvc.uploadBrewery(this.prepareBreweryListToUpload()).subscribe(breweryList => {
-        console.log(breweryList);
-        this.breweryResultList = breweryList;
-        this.rejectedBreweries = this.breweryResultList.filter(brewery => brewery?.result === 'Rejected');
-        this.errordisplayedColumns = Object.keys(this.breweryResultList[0]);
-        this.breweryResultDataSource = this.breweryResultList;
-        this.validatedMsg = 'All breweries successfully got uploaded';
-        this.inValidatedMsg = `${this.rejectedBreweries?.length} of ${this.breweryResultList?.length} breweries got rejected `;
-        this.stepper.next();
+      this.uploadSubscription = this.brewerySvc.uploadBrewery(this.prepareBreweryListToUpload()).subscribe({
+        next: (breweryList) => {
+          this.breweryResultList = breweryList;
+          this.rejectedBreweries = this.breweryResultList.filter(brewery => brewery?.result === 'Rejected');
+          this.errordisplayedColumns = Object.keys(this.breweryResultList[0]);
+          this.breweryResultDataSource = this.breweryResultList;
+          this.validatedMsg = 'All breweries successfully got uploaded';
+          this.inValidatedMsg = `${this.rejectedBreweries?.length} of ${this.breweryResultList?.length} breweries got rejected `;
+          this.stepper.next();
+        }, error: (error) => {
+          this.alert.error(`Error : ${error.message}`);
+        }
       });
-      
     } else {
-      this.alert.error(
-        `Error : Incorrect data, Please go through your file data again.`
-      );
+      this.alert.error(`Error : Incorrect data, Please go through your file data again.`);
     }
   }
 
@@ -352,5 +352,4 @@ export class UploadBreweryComponent implements OnInit, AfterViewInit, OnDestroy 
       this.uploadSubscription.unsubscribe();
     }
   }
-
 }

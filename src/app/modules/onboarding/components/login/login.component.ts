@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit,AfterViewInit {
   gridListColumns = 2;
   isPhoneSize = false;
 
-
   constructor(private fb: FormBuilder,
               private authSvc: AuthService,
               private router: Router,private observer: BreakpointObserver ) { }

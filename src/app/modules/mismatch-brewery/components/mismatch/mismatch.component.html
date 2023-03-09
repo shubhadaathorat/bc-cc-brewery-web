@@ -1,41 +1,42 @@
 <section class="main-div">
     <mat-card>
-      <mat-card-title>Mismatch Brewery - {{mismatchType | titlecase}} 
-      </mat-card-title>
-        <mat-card-content>            
-            <div class="top-row-container" >
-                <p>{{descriptionText}}</p>
+        <mat-card-title>Mismatch Brewery - {{mismatchType | titlecase}}
+            <p>{{descriptionText}}</p>
+        </mat-card-title>
+        <mat-card-content>
+            <div class="top-row-container">
                 <div *ngIf='mismatchDatasourceLength > 0'>
-                    <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName: '', sheet: 'sheet_name', Props: {Author: 'Brewery'}})">Excel</button>
+                    <button mat-raised-button
+                        (click)="exporter.exportTable('xlsx', {fileName: '', sheet: 'sheet_name', Props: {Author: 'Brewery'}})">Excel</button>
                     <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
                     <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
                     <button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
-                </div>                
-              </div>
+                </div>
+            </div>
             <div class="table-container">
                 <table matTableExporter mat-table [dataSource]="mismatchDatasource" multiTemplateDataRows
-                  class="mat-elevation-z0 code-challenge-table" #exporter="matTableExporter">
-                  <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
-                    <th mat-header-cell *matHeaderCellDef style="min-width: 150px">
-                      {{ col }}
-                    </th>
-                    <td *matCellDef="let element">                      
-                          {{element[col]}}
-                    </td>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                  <tr mat-row *matRowDef="let element; columns: displayedColumns" class="element-row"></tr>
-                  <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="9999">No data Available.</td>
-                  </tr>
+                    class="mat-elevation-z0 code-challenge-table" #exporter="matTableExporter">
+                    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+                        <th mat-header-cell *matHeaderCellDef style="min-width: 150px">
+                            {{ col }}
+                        </th>
+                        <td *matCellDef="let element">
+                            {{element[col] || '-'}}
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns" class="element-row"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="9999">No data Available.</td>
+                    </tr>
                 </table>
-    
-              </div>
-              <div [hidden]="isHidden">
-                <mat-paginator [length]="mismatchDatasourceLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                  [showFirstLastButtons]="true"></mat-paginator>
-              </div>
-              
+
+            </div>
+            <div [hidden]="isHidden">
+                <mat-paginator [length]="mismatchDatasourceLength" [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+            </div>
+
         </mat-card-content>
     </mat-card>
-  </section>
+</section>
