@@ -8,7 +8,7 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent  implements OnInit {
 
-  constructor(private swUpdate: SwUpdate) {}
+  constructor() {}
 
   ngOnInit() {
      // added this code to checkForUpdate and reload if new build version pushed
