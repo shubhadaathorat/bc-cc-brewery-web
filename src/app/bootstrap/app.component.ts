@@ -12,13 +12,13 @@ export class AppComponent  implements OnInit {
 
   ngOnInit() {
      // added this code to checkForUpdate and reload if new build version pushed
-     if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.subscribe(() => {
-        this.swUpdate.checkForUpdate().then(() => {
-          window.location.reload();
-          console.log('SW Updated');
-        });
-      });
-    }
+    //  if (this.swUpdate.isEnabled) {
+    //   this.swUpdate.versionUpdates.subscribe(() => {
+    //     this.swUpdate.checkForUpdate().then(() => {
+    //       window.location.reload();
+    //       console.log('SW Updated');
+    //     });
+    //   });
+    // }
   }
 }
