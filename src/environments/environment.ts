@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:3000'
+  apiEndpoint: 'https://4kdcnavs8g.execute-api.us-west-2.amazonaws.com'
 };

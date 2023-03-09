@@ -1,0 +1,309 @@
+@import "../../../../styles/sass/abstracts/variables.scss";
+@import "../../../../styles/sass/abstracts/mixins/mediaquerymanager.scss";
+@import "../../../styles/sass/abstracts/mixins/mixins.scss";
+
+::ng-deep .mat-step-header {
+  .mat-step-icon-selected,
+  .mat-step-icon-state-done,
+  .mat-step-icon-state-edit {
+    background-color: $code-challenge-brand-theme;
+  }
+}
+
+.main-div {
+  .mat-card {
+    @include code-challenge-card-layout;
+    .mat-card-content {
+      .code-challenge-table {
+        @include code-challenge-table;
+        @include breakpoint-max(1400px) {
+          width: 1200px;
+        }
+        table {
+          width: 100%;
+        }
+        .mat-cell {
+          height: 0;
+          border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+          border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+          border-left: 0.5px solid rgba(0, 0, 0, 0.12);
+          border-right: 0.5px solid rgba(0, 0, 0, 0.12);
+        }
+       
+        .element-row td {
+          border-bottom-width: 0;
+        }
+        .element-detail {
+          overflow: hidden;
+          display: flex;
+        }
+      }
+      .main-table-container{
+        width: 100%;
+        @include breakpoint-max(1400px) {
+          overflow: auto;
+        }
+      }
+      overflow: auto;
+      display: inline-block;
+      flex-direction: column;
+      justify-content: center;
+      @include flex-center;
+      .btn-upload{
+        background-color: $code-challenge-brand-theme;
+        color: white;
+      }
+    }
+  }
+}
+
+
+
+/*stepper*/
+.container {
+  width: 80%;
+  height: 300px;
+  border-style: dashed;
+  border-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  background-color: $graphical-bg-color;
+  position: relative;
+  margin: 0 auto;
+  
+  input {
+    position: absolute;
+    margin-top: 60px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 2;
+    width: 100%;
+    height: 40%;
+    cursor: pointer;
+  }
+  button {
+    width: 183px;
+    height: 55px;
+    border-radius: 21.5px;
+    padding: 8px 16px;
+    font-family: $default-font;
+    @include code-challenge-theme-btn;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    @include breakpoint-max(500px) {
+      width: 130px;
+      height: 50px;
+      font-size: 12px;
+    }
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .error-message {
+    margin-top: 15px;
+    color: $color-danger;
+  }
+  .files-list {
+    margin-top: 1.5rem;
+    .single-file {
+      @include flex-center;
+      flex-grow: 1;
+      border: $border-dashed;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      .info {
+        width: 100%;
+        font-weight: $fw-normal;
+        font-family: $default-font;
+        .name {
+          font-size: $fs-small;
+          color: $color-gray-light-3;
+          margin: 0;
+          @include breakpoint-max(500px) {
+            font-size: 10px;
+          }
+        }
+        .size {
+          font-size: $fs-xs;
+          color: $color-gray-light-11;
+          margin: 0;
+          margin-bottom: 0.25rem;
+        }
+      }
+    }
+  }
+}
+.info {
+  h4{
+    @include breakpoint-max(600px) {
+      font-size: 12px;
+    }
+  }
+}
+
+.helper-text{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  @include breakpoint-max(600px) {
+    font-size: 10px;
+  }
+}
+
+.description{
+  width: 80%;
+  display: flex;
+  margin: 10px auto;
+  @include breakpoint-max(900px) {
+    flex-direction: column;
+  }
+  @include breakpoint-max(600px) {
+    width: 100%;
+  }
+}
+.desc-body{
+  padding-left: 5px;
+  p {
+    @include breakpoint-max(900px) {
+      font-size: 14px;
+    }
+    @include breakpoint-max(600px) {
+      font-size: 12px;
+    }
+  }
+  @include breakpoint-max(900px) {
+    padding-left: 0;
+  }
+  
+}
+.desc-title {
+  p {
+    @include breakpoint-max(900px) {
+      font-size: 14px;
+    }
+    @include breakpoint-max(600px) {
+      font-size: 12px;
+    }
+  }
+}
+
+
+
+
+
+
+
+.text-color-white{
+  color:white;
+}
+
+.table-container{
+  overflow: scroll;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+
+
+.top-row-container{
+//   display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  mat-card{
+    @include breakpoint-max(1060px) {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  .slide-toggle{
+      @include breakpoint-max(1060px) {
+        width: 100%;
+  
+      }
+  }
+  @include breakpoint-max(1060px) {
+    flex-direction: column;
+  }
+}
+
+.text-align-center{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  padding: 5px;
+  position: relative;
+}
+
+
+
+
+
+.heading {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-align: center;
+  @include breakpoint-max(1200px) {
+    font-size: 35px;
+  }
+  @include breakpoint-max(700px) {
+    font-size: 25px;
+  }
+}
+
+.heading-description {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: center;
+  @include breakpoint-max(700px) {
+    font-size: 12px;
+  }
+  @include breakpoint-max(1200px) {
+    font-size: 14px;
+  }
+}
+
+.container {
+  width: 80%;
+  height: 200px;
+  border-style: dashed;
+  border-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  background-color: $graphical-bg-color;
+  position: relative;
+  margin: 0 auto;
+  @include breakpoint-max(600px) {
+    width: 100%;
+  }
+}
+.download-excel-button-container{
+  margin: 20px auto;
+  display: flex;
+  justify-content: flex-end;
+  @include breakpoint-max(600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+}

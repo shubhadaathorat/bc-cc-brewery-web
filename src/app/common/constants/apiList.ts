@@ -1,4 +1,5 @@
 export const urls ={
     "login" : 'login',
-    "brewery" : 'brewery',
+    "breweries" : 'breweries',
+    "mismatchBreweries" : (type: string, province:string) => `breweries/mismatch?type=${type}&provience=${province}`,
 }

@@ -10,7 +10,7 @@
             <button mat-stroked-button type="button" class="" (click)="fileInput.click()">
               <span><mat-icon>upload_file</mat-icon> &nbsp; Upload File</span>
               <input #fileInput type="file" onclick="value = null" (change)="fileUploadHandler($event)"
-                style="display:none;" placeholder="Upload File" accept=".xlsx" />
+                style="display:none;" placeholder="Upload File" accept=".xlsx,.csv" />
             </button>
             <div class="files-list" *ngIf="filename">
               <div class="info">
@@ -37,12 +37,12 @@
                   it</a>
               </button>
             </div>
-            <div class="main-button-container">
+            <!-- <div class="main-button-container">
               <button mat-raised-button color="primary" class="custom-button" (click)="validateImportHandler()"
                 [disabled]="isDisabledExcelNext">
                 Validate & Upload
               </button>
-            </div>
+            </div> -->
           </div>
         </mat-step>
 
@@ -95,7 +95,7 @@
 
           </div>
           <div [hidden]="isHidden">
-            <mat-paginator [length]="loanTableDataLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            <mat-paginator [length]="breweryTableDataLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
               [showFirstLastButtons]="true"></mat-paginator>
           </div>
           <div class="import-button-container">
@@ -115,13 +115,13 @@
           <div class="top-row-container">
             <mat-card
               [ngClass]="rejectedBreweries ? 'mat-elevation-z0 valid-data border-danger':'mat-elevation-z0 valid-data'">
-              <mat-icon [ngClass]="rejectedBreweries ? 'validity-icon-error':'validity-icon' " style="margin: 0 4%;"> {{
+              <mat-icon [ngClass]="rejectedBreweries?.length === 0 ? 'validity-icon':'validity-icon-error' " style="margin: 0 4%;"> {{
                 rejectedBreweries? "warning" : "check_circle" }}</mat-icon>
-              {{ rejectedBreweries?inValidatedMsg : validatedMsg}}
+              {{ rejectedBreweries?.length === 0?validatedMsg  : inValidatedMsg}}
             </mat-card>
             <div class="slide-toggle">
               <mat-slide-toggle color="warn" (change)="rejectedBreweryToggleHandler($event)" [checked]="isSlideToggleChecked"
-                [disabled]="rejectedBreweries.length === 0">
+                [disabled]="rejectedBreweries?.length === 0">
                 Only show rejected breweries
               </mat-slide-toggle>
             </div>

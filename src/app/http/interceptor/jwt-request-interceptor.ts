@@ -14,11 +14,11 @@ export class jwttokenInterceptor implements HttpInterceptor {
     let currentUserId = this.localStorageSvc.getWithExpiry("User")?.data?.id;
     console.log(currentUserId);
     let authReq : HttpRequest<any> = req
-    if(!req.url.endsWith('/login')){      
-      authReq = req.clone({
-        headers: req.headers.set('id', currentUserId)
-      });
-    }
+    // if(!req.url.endsWith('/login')){      
+    //   authReq = req.clone({
+    //     headers: req.headers.set('id', currentUserId)
+    //   });
+    // }
     const handleObs: Observable<HttpEvent<any>> = next.handle(authReq);
     return handleObs
   }

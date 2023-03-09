@@ -8,6 +8,7 @@ import {CustomHttpModule} from '../http/custom-http.module';
 import { CodeChallengeCommonModule } from '../common/code-challenge-common.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
+import { MatTableExporterModule } from 'mat-table-exporter/public-api';
 
 /**
  * Position all feature modules ahead of AppRouting Module.
@@ -25,6 +26,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     CustomHttpModule,
     CodeChallengeCommonModule
+
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent]

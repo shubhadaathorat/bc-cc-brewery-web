@@ -30,6 +30,7 @@
     "@angular/service-worker": "^13.1.0",
     "@ngneat/transloco": "^4.2.6",
     "core-js": "^2.6.4",
+    "mat-table-exporter": "^10.2.4",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "rxjs": "~6.5.3",

@@ -1,6 +1,6 @@
 export interface BreweryRequest {    
     name: string;
-    breweryType: string;
+    type: string;
     street: string;
     city: string;
     county_province: string;
@@ -8,20 +8,20 @@ export interface BreweryRequest {
     country: string;    
 }
 
-export interface BreweryResponse {
-    status: string;
-    code: number;
-    data: BreweryResult[]
-}
 
 export interface BreweryResult {
-    name: string;
-    breweryType: string;
-    street: string;
+    brewery_name: string;
+    street_address: string;
     city: string;
     county_province: string;
     postal_code: string;
     country: string;
-    result:string,
-    message : string;
+    brewery_type: string;
+    result: string;
+    is_active?: boolean;
+    created_by?: number;
+    updated_by?: number;
+    updated_at?: string;
+    id?: number;
+    created_at?: string;
 }

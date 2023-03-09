@@ -202,7 +202,7 @@
   justify-content: center;
 }
 @mixin code-challenge-flex-center {
-  display: flex;
+  display: inherit;
   align-items: center;
 }
 @mixin flex-center {
@@ -377,6 +377,7 @@
 }
 @mixin code-challenge-card-content {
   padding: 0 $card-padding; 
+
   // height: calc(100% - 40px);
 }
 @mixin code-challenge-card-layout {
