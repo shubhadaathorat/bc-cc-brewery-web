@@ -1,8 +1,8 @@
 
 tasks:
-  - init: run npm install -g npm@latest 
-          run npm install -g typescript 
-          run npm install -g @angular/cli@13.1.0 
+  - init: npm install -g npm@latest 
+          npm install -g typescript 
+          npm install -g @angular/cli@13.1.0 
           npm run build
 
 
