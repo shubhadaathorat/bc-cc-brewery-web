@@ -4,6 +4,7 @@ tasks:
           npm install  
     command: 
           npm run build
+          npm run start-local
 
 
 
