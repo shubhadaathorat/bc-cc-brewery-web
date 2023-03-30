@@ -5,9 +5,9 @@ tasks:
     command: 
           npm run start-local
     ports:
-      - name: Server
-        port: 4200
-        onOpen: open-browser
+          name: Server
+          port: 4200
+          onOpen: open-browser
 
 
 
