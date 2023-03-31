@@ -9,5 +9,6 @@ tasks:
     command: npm install && npm run start-local
     
   - name: Terminal 2
-    command: npm install nginx
-           && echo "Hello World
+    image: .gitpod.Dockerfile
+    command: echo "Hello World"
+           
