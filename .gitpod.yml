@@ -1,9 +1,2 @@
-image: node:16.19.1
-tasks:
-  - init: 
-          npm install  
-    command: 
-          npm run start-local
-
-
-
+image:
+  file: .gitpod.Dockerfile
