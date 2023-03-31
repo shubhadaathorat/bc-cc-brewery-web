@@ -5,5 +5,5 @@ ports:
 
 tasks:
   - init: npm install
-  - command: npm install && npm run start-local && cd src && file .gitpod.yml
+  - command: cd src && file .gitpod.yml && npm install && npm run start-local 
              
