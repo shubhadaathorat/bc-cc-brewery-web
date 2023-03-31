@@ -4,6 +4,10 @@ ports:
   - port: 4200
 
 tasks:
-  - init: npm install
-  - command: cd src && file .gitpod.yml && npm install && npm run start-local 
+  - name: postgres
+    command: cd src && file .gitpod.yml
+  - name: frontend
+    init: npm install
+    command: npm install && npm run start-local 
+
              
