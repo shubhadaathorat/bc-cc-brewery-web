@@ -1,14 +1,8 @@
-
+image: node:16.19.1
   
 ports:
   - port: 4200
 
 tasks:
-  - name: Terminal 1
-    init: npm install
-    command: npm install && npm run start-local
-    
-  - name: Terminal 2
-    image: .gitpod.Dockerfile
-    command: echo "Hello World"
-           
+  - init: npm install
+  - command: npm install && npm run start-local
