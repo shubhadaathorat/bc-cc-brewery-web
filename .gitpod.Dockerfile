@@ -1,7 +1,4 @@
-FROM gitpod/workspace-full:latest
-
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
+FROM node:16.19.1 
 
 WORKDIR /workspace/my-project
 
