@@ -6,6 +6,5 @@ ports:
 
 tasks:
   - init: npm install
-  - command: ng serve --host 0.0.0.0 --disable-host-check
   - command: npm install && npm run start-local
 
