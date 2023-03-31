@@ -2,7 +2,7 @@ image:
   file: .gitpod.Dockerfile
   
 ports:
-  - 4200
+  port: 4200
 
 tasks:
   - init: npm install
