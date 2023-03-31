@@ -4,6 +4,11 @@ ports:
   - port: 4200
 
 tasks:
-  - init: npm install
-  - command: npm install && npm run start-local
+  - name: Terminal 1
+    init: npm install
+    command: npm install && npm run start-local
+    
+  - name: Terminal 2
+    command: npm install nginx
+    command: echo "Hello World"
 
