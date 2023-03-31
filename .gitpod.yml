@@ -1,5 +1,4 @@
-image:
-  file: .gitpod.Dockerfile
+image: node:16.19.1
   
 ports:
   - port: 4200
