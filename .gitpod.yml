@@ -3,5 +3,4 @@ tasks:
   - init: 
           npm install  
     command: 
-          cd bc-cc-brewery-web
-          npm run start-local
+          cd bc-cc-brewery-web && npm run start-local
