@@ -1,0 +1,5 @@
+image: gitpod/workspace-postgres
+
+tasks:
+  - init: pg_start
+    command: CREATEDB codechallenge
