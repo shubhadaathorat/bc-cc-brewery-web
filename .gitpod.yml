@@ -10,5 +10,4 @@ tasks:
     
   - name: Terminal 2
     command: npm install nginx
-    command: npm run nginx
-
+           && echo "Hello World
